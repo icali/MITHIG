@@ -1,0 +1,23 @@
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{1}%
+\makeatletter
+\providecommand{\hrefCMSnoop }[0]{\@secondoftwo}%
+\makeatother
+\providecommand{\doi}{\texttt{doi:}\begingroup \urlstyle{tt}\Url}
+
+\bibitem{Chatrchyan:2011sx}
+\hrefCMSnoop {} {{ CMS Collaboration} Collaboration, ``{Observation and studies
+  of jet quenching in PbPb collisions at nucleon-nucleon center-of-mass energy
+  = 2.76 TeV}'',} \textit{ Phys.Rev.} \textbf{ C84} (2011) 024906,
+  \href{http://dx.doi.org/10.1103/PhysRevC.84.024906}{\doi{10.1103/PhysRevC.84.024906}},
+\href{http://www.arXiv.org/abs/1102.1957}{\texttt{ arXiv:1102.1957}}.
+%%CITATION = ARXIV:1102.1957;%%.
+
+\bibitem{Chatrchyan:2012nia}
+\hrefCMSnoop {} {{ CMS Collaboration} Collaboration, ``{Jet momentum dependence
+  of jet quenching in PbPb collisions at sqrt(sNN)=2.76 TeV}'',} \textit{
+  Phys.Lett.} \textbf{ B712} (2012) 176--197,
+  \href{http://dx.doi.org/10.1016/j.physletb.2012.04.058}{\doi{10.1016/j.physletb.2012.04.058}},
+\href{http://www.arXiv.org/abs/1202.5022}{\texttt{ arXiv:1202.5022}}.
+%%CITATION = ARXIV:1202.5022;%%.
+
+\end{thebibliography}\endgroup

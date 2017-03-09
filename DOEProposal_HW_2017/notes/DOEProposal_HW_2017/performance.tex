@@ -1,0 +1,122 @@
+\section{Heavy Ion Trigger Performance} \label{sec:hiTrigPerf}
+
+In this Section we discuss detailed jet trigger performance studies comparing the 
+current L1 trigger system as described in section~\ref{calo:present},
+the Stage-1 upgrade described in Section~\ref{calo:stage1} and 
+the Stage-2 upgrade  planned for the
+high luminosity LHC (HL-LHC) with much higher granularity of inputs from
+calorimeter cells. 
+For all systems the trigger performance was evaluated based on stored 
+information (``trigger primitives'') from real data 
+collected in the 2011 heavy ion data taking period.
+Using real data is preferable for  L1 trigger efficiency estimation since 
+the effects of underlying event are not simulated perfectly by MC
+simulations. 
+
+\subsection{Jet Trigger Requirements}
+One key measure of the performance of a trigger is the rejection rate and the
+response of the rejection rate to increased threshold of the trigger. 
+Another measure of the trigger performance  is how efficient the
+trigger is at selecting jets above its threshold and rejecting those below
+the threshold; this is a jet turn-on curve. In a plot of accepted jets as a
+function of offline jet \pt\ (iterative cone calorimeter jets for this
+study), an effective trigger should produce a sharp turn-on from 0\% accepted to
+100\% accepted. The offline jet \pt\ value at which the trigger is 100\%
+efficient will not perfectly match the threshold value because of limitations in the
+jet definition at L1; the figure of merit is the steepness of the curve.
+
+
+Figure \ref{fig:efficiency_comparison} shows a comparison of the trigger
+systems' rejection rate as a function of the threshold set at L1. 
+With the luminosity increase after long shutdown LS1, an accept rate of 5\% (rejection
+factor of 20) is required in order to remain sample dead-time free. This would allow 
+sampling of the full delivered luminosity for the desired jet trigger paths 
+at the HLT. 
+%\begin{figure}[!ht]
+%\begin{center}
+%\includegraphics[width=.60\textwidth]{fig/heavyIon//efficiency_comparison_l1primitives.pdf}
+%\caption{The jet finder is applied to minimum bias data from 2011 without
+%event selection using the L1 primitives present in the RAW data. The
+%fraction of events which have a jet above a given $E_t$ threshold is plotted
+%as a function of that threshold. Note that the threshold is applied to the
+%L1 jet energy and does not correspond to the HLT or offline jet energy
+%scales.}
+%\label{fig:efficiency_comparison}
+%\end{center}
+%\end{figure}
+
+
+In the case of heavy ion collisions, the assessment of the trigger performance
+as a function of collision centrality is important. 
+A trigger may be effective at low centrality (low multiplicity) but
+inefficient in very central events, i.e., at high multiplicity. 
+
+The jet turn-on curves displayed in the next sections are created using L1 primitives and
+minimum bias data with event selection. 
+Only events without beam halo and with $>$ 3 GeV in each forward calorimeter
+are used. The sample is broken into two parts, 
+one with centrality less than 30\% and the other greater than 50\%. For each
+event, the L1 jet finder is run and the given threshold is applied. 
+The fraction of events which pass the threshold as a function of the highest
+offline jet \pt\ 
+%(icPu5CaloJets)  Not defined and jargon anyway -Matt
+ is plotted. If points are missing from an image, this means that 0 events. The figures contain
+ turn-on curves for two different jet thresholds.
+%were accepted in that bin.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.60\textwidth]{fig/heavyIon//jetto_current.pdf}
+\caption{Jet trigger turn-on curve for the current system at L1 thresholds of 60 and 100
+GeV. Results are shown for peripheral events (open symbols) and central events (filled symbols).
+A large shift in the turn-on curve as a function of centrality is seen.}
+\label{fig:jetto_current}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.60\textwidth]{fig/heavyIon//jetto_2015.pdf}
+\caption{Jet trigger turn-on curve for the Stage-1 system at L1 thresholds of 60 and 100
+GeV. Results are shown for peripheral events (open symbols) and central events (filled symbols).
+Full efficiency is reached at the same \pt\ for central and peripheral events.}
+\label{fig:jetto_2015}
+\end{center}
+\end{figure}
+
+\subsection{Existing system}
+
+As can be seen from Figure \ref{fig:efficiency_comparison}, the existing
+trigger system requires an unacceptably high threshold of $p_{\rm T}\, \gtrsim 350$~GeV to 
+reach the 5\% accept rate required for the luminosity increase. Such a
+threshold would severely limit the physics capabilities of the detector. 
+
+Even for lower thresholds (with high dead-time) in the high luminosity case),
+Figure~\ref{fig:jetto_current} shows that the current system performs poorly 
+for high centrality events. Comparing central to peripheral events, a large
+shift in the turn-on curve is seen, when comparing the same nominal threshold
+for central and peripheral events.
+
+\subsection{Stage-1 system}
+
+Figure \ref{fig:efficiency_comparison} shows that the required threshold for
+the Stage-1 system is relatively low at about $p_{\rm T}\, \sim 75$~GeV, 
+comparable to the full Stage-2 system. Also at even lower \pt\ the Stage-1 system
+has a much smaller accept fraction than the current system, allowing smaller 
+prescale factors while preserving the bandwidth constraints.
+The jet turn-on curves, Figure~\ref{fig:jetto_2015} 
+shows that the trigger is efficient and has similar performance for the
+high and low centrality samples, 
+especially at the lower threshold. The Stage-1 system would adequately meet the
+requirements of the Heavy Ion program at the increased luminosity.
+
+\subsection{Stage-2 system}
+
+The most effective trigger, the full stage-2 system is even more responsive
+to threshold changes 
+than the stage-1 system and shows nearly identical performance between the two
+centrality samples. 
+The Stage-2 allows for more flexible L1 trigger jet algorithms as well,
+including a single-tower trigger which could be used to look for high-\pt\
+tracks to be used as seeds for other physics objects.
+
