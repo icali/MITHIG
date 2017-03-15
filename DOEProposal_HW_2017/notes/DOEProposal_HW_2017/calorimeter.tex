@@ -1,476 +1,126 @@
 \newpage
 
-\section{Trigger Upgrade Goals and Plans\label{sec:calo}}
 
-In this section we provide a recall the details and limitations of the present CMS PbPb readout scheme and L1 trigger system 
-and discuss the technical implementation of the Stage-1 and Stage-2 phases of the L1 upgrade project. 
-
-One key difference between CMS readout in PbPb compared to pp running relates to the strip tracker.
-In PbPb running the strip tracker of CMS is read out in ``Virgin Raw mode'' which corresponds to 
-reading out all the 10~M silicon strips without any zero suppression. This allows execution of very precise zero 
-suppression algorithms, that are very difficult to implement in the Front End Controllers, either offline (as was done for 2010 PbPb
-data taking) or at the HLT (as was done in 2011). This is critical for assuring good track reconstruction efficiency 
-in the high track density environment created in central PbPb collisions.  
-Due to the tracker/DAQ readout bandwidth limitations, the maximum achievable L1 readout rate during PbPb collisions 
-in Virgin Raw mode is about 3 kHz. Independently, the pixel readout chain sets a limit to the maximum L1 accept 
-rate of similar magnitude due to the risk of buffer overflow in the case of 2 subsequent PbPb events with very 
-high particle multiplicity. 
-
-The limit of the readout rate, in combination with the limited selectivity of the current L1 system for jet triggers 
-of about two, sets the maximum collision rate that the present CMS experimental setup can fully exploit to about 6kHz.
-In the 2011 PbPb run the accelerator achieved collision rates of about 4.5 kHz, well within the limits of the present system.
-
-To exploit the expected increase in the luminosity after the current shutdown (LS1), we propose to participate in 
-the planned upgrade of the L1 trigger system, allowing the upgrade plan to be accelerated to match the PbPb needs. 
-CMS is planning to upgrade the L1 trigger system in two stages. Stage-1 will occur before the 2015 HI run.  Stage-1
-will re-use most of the existing triggering infrastructure with important improvements in the communication 
-between different detector regions as well as upgrades to the readout of trigger primitives from the forward 
-calorimeter, HF. This is achieved by creating a parallel system with new electronics acting as a data concentrator 
-and receiving information from all the trigger primitives of the system. 
-The Stage-1 upgrade will be sufficient to handle the rates expected before the next long shutdown in 2018 (LS2). 
-Stage-2 will be combined with the more extensive upgrade of the HCAL and ECAL readout and will further increase 
-the speed and granularity of the information available to make L1 trigger decisions. 
-
-
-The electronics for the Stage-1 and Stage-2 systems will be based on the latest FPGAs
-that use high speed serial links (5-10
-Gb/s) to provide high bandwidth I/O.  While providing Tb/s of I/O per
-FPGA, serial links do require $\sim$100~ns to serialize and
-de-serialize the data and thus the number of layers in the trigger
-should be kept to a minimum to minimize latency. Consequently, the
-system comprises just 2 layers, with 2 processing card types based on
-Xilinx Virtex 7 FPGAs. 
-
-In order to minimize the size, cost and latency of the system the HCAL 
-and ECAL Trigger Primitive Generators (TPGs) must also support 5-10 Gb/s serial links.
-Furthermore, at these link speeds and density the signals must be transmitted optically. 
-The trigger primitive input to the present system is based on 1.2 Gb/s serial links over copper.  
-For ECAL almost all the current electronics will remain unchanged, 
-but the Serial Link Board (SLB) that performs
-the parallel to serial conversion will be replaced with an optical
-equivalent (oSLB - optical SLB), with 4.8 Gb/s output. The ECAL readout upgrade will occur during LS2 in time for Stage-2 upgrade.
-For Stage-2 the HCAL project will upgrade the so-called HCAL ``back-end
-electronics'' (trigger and readout cards) during LS1 and after the
-first year of running post-LS1, and thus will be able to easily
-provide optical signals because the upgrade is based on the same
-technology.\\
-
-An additional feature of the oSLB is a second output which will, in
-conjunction with the replacement of the equivalent card on the
-existing Regional Calorimeter Trigger (RCT, described in the following
-section), allow the present system to operate in parallel to the
-new system. HCAL will also be able to drive both the new \& old
-systems, but crucially the duplication to run both systems appears
-earlier in the HCAL trigger path by splitting the optical fiber input
-to the back-end electronics.
-Thus the new and existing HCAL back-end electronics will both be present in the counting room.  The
-exception to this is HF which will only have the new back-end
-electronics and thus RCT input will need to be upgraded to handle the
-new optical inputs for parallel operation. The ability to run both old 
-and new system in parallel ensures that the upgrade does not jeopardize 
-the trigger at a crucial time for CMS.
-
-The Stage-1 of upgrade together with elements of Stage-2 will be commissioned 
-in 2015 in parallel with running the current trigger. 
-Both old and new trigger will be operated during the pp run such that they can be fully debugged. 
-The heavy-ion run is expected after almost a year of pp running, giving sufficient time
-to prepare.
-
-In Stage-1 the the existing RCT will be kept, but the GCT will be replaced with prototype hardware.
-The system will operate with a coarser and fixed granularity than the full Stage-2 upgrade,
-but will be sufficient to improve the jet energy resolution and the underlying event
-subtraction as shown below.
-
-The calorimeter trigger upgrade will improve both the quality and reduce the rate of key physics objects.  It will provide:
-
-\begin{enumerate}
-\item Improved pileup subtraction; information from regions for the full $\phi$ and $\eta$ range will be available at the time of 
-decision. A pileup subtraction algorithm based on information from  full $\phi$ rings in slices of $\eta$ will be available. 
-
-\item Improved energy resolution; from both the better construction of objects (e.g. objects will have pile up subtraction applied), but also from improved trigger primitives as the HCAL upgrade is implemented.
-
-\item Additional flexibility; the current system is comprised of many cards that each typically perform a single task with limited sharing of data between cards.  Inevitably this limits the algorithms that can be implemented. This will be improved in the upgraded design.
-\end{enumerate}
-
-The following Section describes further details of the present system and of the changes that will be implemented as a part of the 
-Stage-1 upgrade.
-
-\subsection{Present System\label{calo:present}}
-
-\subsubsection{Overview}
-
-The present CMS calorimeter trigger is built in two stages, a Regional 
-Calorimeter Trigger (RCT) and Global Calorimeter Trigger (GCT).  The 
-RCT receives Trigger Primitives (TPs) in the form of an 8-bit rank (E$_T$) 
-and quality bit from over 8000 towers in the Hadronic (HCAL), Electromagnetic 
-(ECAL), and Forward (HF) Calorimeters for trigger coverage out to $|\eta|<5$.  
-The RCT processes this information in parallel and sends 18$\times$8 
-e/$\gamma$ candidates, 36 E$_T$ sums of 4$\times$4 tower regions, 144 
-HF region E$_T$s, and corresponding bits for object classification.  The 
-GCT sorts the e/$\gamma$ candidates further, finds Jets (Central, Forward, 
-and Tau) using the sums and HF E$_T$s, and calculates global quantities like 
-Missing E$_T$. It then sends four e/$\gamma$ each of two types, isolated and 
-non-isolated, four each of Central, Tau, and Forward Jets, Jet counts, and 
-several global quantities to the CMS Global Trigger (GT) for the final CMS 
-L1 trigger decision.
-
-Data from the ECAL front-end is received on fibers at the front panels 
-of the ECAL Trigger Concentrator Cards (TTC) in the CMS underground counting 
-room (USC55) and converted to Trigger Primitives for 4032 electromagnetic 
-calorimeter trigger towers over the entire ECAL Barrel (EB) and ECAL Endcap 
-(EE).  In the barrel, a trigger tower is defined as 5$\times$5 crystals in 
-the ECAL of total dimension 0.087$\times$0.087 ($\Delta\phi\times\Delta\eta$), 
-corresponding 1:1 to the physical tower size of the HCAL.  In the endcap 
-the towers are more irregular, but are matched as close as possible to the 
-size of the corresponding HCAL tower.
-
-Similarly, the data from the HCAL and HF front-end is received on fibers at 
-the HCAL Trigger Readout (HTR) boards in USC55.  After processing, up to 6 
-SLBs send the 4032 HCAL Barrel and Endcap trigger primitives and the 144 HF 
-trigger primitives from HTRs to the RCT.  For each HCAL trigger tower an 
-8-bit E$_T$ and a MIP bit are sent to the RCT.  For HF an 8-bit E$_T$ and 
-a threshold-based bit are sent to the RCT.  In the HF the tower size is 
-significantly larger, and currently is 0.5 in $\eta$ by 20$^\circ$ in $\phi$, 
-a combination of up to 6 physical HF towers.
-
-\subsubsection{RCT}
-
-The  Regional Calorimeter Trigger (RCT) receives the TPs from the ECAL, HCAL, 
-and HF at eighteen 9U crates of custom electronics.  Eight Receiver Mezzanine 
-Cards (RMCs) with the V2716-1 mounted on it are on the RCT Receiver Cards 
-(RCs) to receive HCAL and ECAL data.  A single mezzanine card located on 
-the Jet/Summary Card is for the HF data.  Before processing, the data is 
-deskewed, linearized, and aligned. 
-
-Each RC processes 64 towers of data, 32 ECAL and 32 HCAL.  This is split 
-into two 4$\times$4-tower regions for processing.  For the jets and global 
-quantities, two 4$\times$4 tower sums (ECAL and HCAL summed per tower), an 
-OR of the 16 corresponding MIP bits, and $\tau$-veto bits are made. For 
-the electron/photon finding,  data is copied and shared, and aligned before 
-transmission on a 160 MHz ECL custom backplane to 7 Electron Isolation Cards 
-and one Jet/Summary Card.  The Electron Isolation Cards find 4 electron 
-candidates,  one each isolated and non-isolated per 4$\times$4 trigger 
-tower region out to $|\eta|<3$, using the shared data between the crates' 
-Receiver Cards on cables, and from adjoining cards to ensure seamless 
-coverage.  The Jet/Summary Card receives the HF data, forwards it to the 
-GCT, does the final electron/photon sort, and sends the regional E$_T$ 
-sums and the electron candidates to the Global Calorimeter Trigger (GCT).  
-For the purpose of the heavy-ion physics primarily the jet and electron/photon candidates are selected.
-
-
-\subsubsection{GCT}
-
-The Global Calorimeter Trigger (GCT) is the last stage of the L1 CMS calorimeter trigger chain. A detailed description of the GCT design, implementation and commissioning is beyond the scope of this paper and is provided in several conference papers 
-~\cite{gct1,gct2} describing the changes in design since the CMS Trigger TDR~\cite{cms_triggerTDR}. The trigger objects computed by the GCT from data supplied by the Regional Calorimeter Trigger are listed below and described 
-in subsequent paragraphs:
+The CMS experiment is mainly designed to record high luminosity, high-PU proton-proton collisions events.  However, with
+several detectors tweaks/configuration changes, over the last several years, the CMS experiment has been able to record
+successfully also the high multiplicity Heavy-Ions collisions delivered by LHC. As discussed already in previous
+proposals, the main changes required to allow CMS to operate in HI environments could be summarized as follows:
 
 \begin{itemize}
-\item four isolated and four non-isolated electrons/photons of highest transverse energy; 
-\item four central, four forward and four tau jets of highest transverse energy; 
-\item total transverse energy; total jet transverse energy;missing transverse energy; 
-\item missing jet transverse energy; summing of feature bits and transverse energies in the forward hadronic calorimeter.
+\item Dedicated Silicon Pixel Front End device firmware for high multiplicity environment. 
+\item The Silicon Tracker zero suppression were bypassed and all the channels information were forwarded to the CMS DAQ system. The Zero Suppression was performed in HLT. A new tracker FED firmware was also designed to reduce the event payload of ~30% without information loss. 
+\item DAQ reconfiguration / rebalance to deal with big data volumes and high throughput. In standard p-p collisions operation, an average event size correspond to ~ 1- 1.5 MB/even. During Pb-Pb collision operation, the average event size is at around 17 MB/event. 
+\item The Level-1 trigger firmware was redesigned to perform a dedicated underlying event subtraction algorithm and to include specific HI algorithms 
+\item Significant adjustment in the overall CMS dataflow
 \end{itemize}
 
-The electron/photon sort operation must determine the four highest transverse energy objects from 72 candidates supplied by the RCT, 
-for both isolated and non-isolated electrons/photons.
-
-To sort the jets the GCT must first perform jet finding and calibrate the clustered jet energies. The jets are created from the 396 
-regional transverse energy sums supplied by the RCT. These are the sum of contributions from both the hadronic and electromagnetic 
-calorimeters.
-
-In addition to these tasks the GCT acts as a readout device for both itself and the RCT by storing information until receipt of a L1A 
-and then sending the information to the DAQ.
-
-
-
-\subsection {Stage-1 trigger upgrade\label{calo:stage1}}
-
-The current calorimeter trigger will be modified, essentially replacing 
-the GCT with prototype hardware. The RCT will
-be reprogrammed to provide two types of clusters, 4x4-clusters and
-2x1-clusters.  Each RCT crate reports all fourteen 4x4-clusters, which
-are processed by it as 10-bit $E_T$ sums of both ECAL and HCAL
-response and an identification bit, to indicate if the energy is
-electromagnetic or not.  Each RCT crate reports four highest $E_T$
-2x1-clusters, which are reported as 6-bit $E_T$ sums of ECAL and HCAL
-response.  These 2x1-clusters could be locally isolated using the
-nearest neighbor ``L-isolation'' algorithm implemented in the current
-RCT. The schematics of the Stage-1 system is shown in Figure~\ref{fig:L1_Stage1}.
-
-The modern $\mu$TCA processors with latest FPGAs (MP7 cards) with
-significant resources will be used in the layer-2 system to receive
-all the RCT data in one card to implement the improved algorithms
-described above.  The cluster data from the current RCT crates
-(layer-1) is converted from its present 80-MHz differential ECL copper
-links to an optical format (6.4 Gbps) using a new VME card, the oRSC.
-
-Eighteen oRSC, one per RCT crate, are needed to serve all the data
-to the new layer-2 hardware.  The data is sent on two 6.4 Gbps fibers
-per oRSC. The oRSC is also able to replicate these two fibers worth
-of data six times.  This feature enables the use of separate 
-cards for e$\gamma\tau$, $\mu$ and jet paths enabling significant
-FPGA resources for processing.  It is also planned that one of the cards will be dedicated to heavy ion
-selection processing. 
-
-The oRSC receives data from the neighboring Jet Summary Card in the
-RCT crate on cables at 80 MHz in differential ECL format. The oRSC
-also receives timing information from the RCT clock fanout system.
-The data is appropriately conditioned and fed into a Xilinx Kintex
-XC7K325T chip which has 24 serial drivers operating at up to 6.4 Gbps.
-The firmware will be configured to multiplex the data and serve it out
-in serial format on these outputs.  The logic cells available on this
-chip are also available for pre-computation of some sums, e.g., for
-pileup level determination if needed.
-
-For the forward region of the calorimeter (HF), finer granularity 
-information is available in optical format.  Therefore, a new layer-1 
-system is implemented using two CTP7 cards.  The clusters with finer
-position resolution are used in jet finding in this region. 
-
-\begin{figure}
-\begin{center}
-\vspace{.2in}
-\centerline {
-\includegraphics[width=4in]{fig/heavyIon/L1_schematics.pdf}
-}
-\vspace{.2in}
-\end{center}
-\caption{Schematics of the Stage-1 upgrade.
-\label{fig:L1_Stage1} }
-\end{figure}
-
-%The layer-2 system computes the pileup contribution event-by-event
-%using the 4x4 information.  Algorithms could use a truncated mean
-%or statistical median or mode to determine the pileup contribution.
-%The pileup contribution will be subtracted from the isolation and
-%jet regions.
-
-%The traditional trigger architecture is available as a fallback option
-%for the full Stage-2.  In this case twenty four CTP7 cards will be
-%used with nearest neighbor sharing to obtain all particle clusters.
-%The advantage in Stage-2 would be that the layer-1 clusters can be
-%reported at higher position and energy resolution than in the current
-%RCT system.  These finer clusters will be transferred to layer-2 cards
-%for finding the trigger objects as described above for Calo-2015 system.
-
-%Mixed use of RCT for HCAL clusters and twelve CTP7 cards for
-%electromagnetic clusters provides an option to implement a good
-%alternative for the electron/photon/tau triggers, within the
-%traditional architecture, although the jet and energy objects remain
-%somewhat constrained due to the 4x4-cluster size from RCT.
-
-%\subsection{oRSC}
-
-\subsubsection{Upgrade to HF trigger primitives\label{calo:hf}}
-
-Readout of HF calorimeter is expected to be upgraded in time for Stage-1, during LS1 shutdown.
-The \utca electronics is expected to operate with both the
-existing RCT trigger and the upgraded calorimeter trigger
-simultaneously. Each $\mu$HTR will be connected to a single $\Delta\phi =
-20^\circ$ wedge of either HF+ or HF-.  For the existing RCT trigger,
-the $\mu$HTR is responsible for calculating region energy sums which cover
-$\Delta \eta \times \Delta \phi = 0.52 \times 0.35$.  With
-single-anode PMTs, this corresponds to a sum over twelve channels, six
-long-fiber channels and six short-fiber channel.  
-
-For the HF link to the upgraded trigger, the data will be transferred
-over two fibers per $\mu$HTR at 6.4 Gbps using 8b10b encoding.  The link
-will thus carry sixteen bytes from the $\mu$HTR to the calorimeter trigger
-for every bunch crossing.  
-
-Each trigger
-primitive will consist of an eight-bit \ET value determined from the
-combination of the long and short fiber energy for the tower and two
-feature bits.  The \ET may be compressed to a non-linear scale by a
-look-up table which can be undone at the trigger to allow for a broader
-dynamic range while retaining the ability to distinguish small
-signals.  One of the feature bits will indicate if the distribution of
-energy in the tower between the long and short fibers is consistent
-with an electron.  The second feature bit will indicate energy deposits which
-are out-of-time with respect to the collision, as determined by the
-TDC measurements.
-
-The EM feature bit and the full-granularity tower data will be
-available to an upgraded calorimeter trigger as soon as the HF
-back-end upgrade is complete -- the installation of the upgraded
-front-end is not required.  The upgrade of the front-end will bring in
-the TDC feature bit and new handles for identifying and recovering or
-suppressing anomalous noise signals at the trigger level.  In
-particular, the TDC readings and the energy distributions between the
-various readouts will allow the identification of anomalous hits.  If
-the anomalous hit affects only one of two anodes for a channel, the
-response from the 'clean' channel will be doubled and sent for the
-total energy response of the tower, with only a minimal loss of
-resolution.  If the anomalous signal affects both anodes, as
-determined from the TDCs, the tower energy will be zeroed in the $\mu$HTR.
-If a trigger on out-of-time energy is defined, the $\mu$HTR can instead
-pass the energy and use the TDC-out-of-time feature bit to identify
-the situation.
-
-As each $\mu$HTR has twelve fiber links available for transmitting trigger
-data, there is also significant scope for expansion if required in the
-future.
-
-\subsubsection{Optical Synchronization and Link Boards (oSLBs) \& Optical Receiver Mezzanines (oRMs)}
-
-The current calorimeter trigger uses a synchronization method
-implemented in the synchronization and link board (SLB). These boards
-allow the synchronization of electromagnetic and hadronic trigger
-primitives at the LHC frequency (40.08 MHz) and its transmission to
-the Regional Calorimeter Trigger. The data are received by Receiver
-Mezzanine (RM) cards mounted on the RCT.   
-
-At present each SLB transmits up to 4 channels at 1.2 Gb/s on copper.  The upgraded SLB (Optical SLB - oSLB) will concentrate the data onto a single 4.8 Gb/s fiber, with a 2nd fiber output for transmission to the upgraded calorimeter trigger.  The Receiver Mezzanine (RM) card on the RCT will also need to be upgraded to an optical version (oRM) to run both the old \& new trigger in parallel.  The design of the oRM and oSLB are very similar.
-
-\subsubsection{Backplane optimized processor (CTP7) \& Optical I/O processor (MP7)}
-The CTP7 is an AMC card with a single Virtex-7 XC7VX690T FPGA with GTX links, dual SDRAM for dedicated DAQ and TCP/IP buffering, a Module Management Controller (MMC), and custom-designed power modules. On the front panel, the CTP7 uses 5 Avago AFBR-820B Receiver Modules, and two AFBR-810B Transmitter modules to provide 60 optical inputs and 24 outputs running at up to 10 Gbps. For back-plane communication, as used to share data across calorimeter regions for seamless regional reconstruction, the CTP7 has 12 bidirectional links to the backplane which can be run at up to 4.8 Gbps. Slots 2-5 and 8-11 have bi-directional links in a 2x4 array for handling boundaries within a processing region. Slots 6 and 7 have links to the upper or lower ranks of the processing array and are used for collating data for inter-crate communication. For completeness, the remaining links are routed to slots 1 and 12, although currently unnecessary.\\
-
-The MP7 was designed to be a generic stream-processing engine. This design philosophy manifests itself most clearly in the distinctive data interface, which is all-optical and has symmetric transmit and receive bandwidths. Using a single interface for the sending and receiving of all data offers several distinct advantages: Primarily the board ceases to have a specific role and becomes a truly generic stream-processing engine. Application of the board to a specific task is no longer restricted by the bandwidth and compatibility of each type of interface, but only by the total bandwidth, whilst all specialization required for a task is contained within the programming of the board and the interconnections between boards. The MP7‚ optical interface is provided by up to six Avago MiniPOD transmitters and six Avago MiniPOD receivers. Each MiniPOD device provides 12 optical links running at up to 10.3 Gbps, giving the MP7 a total optical bandwidth of up to 740 Gbps in each direction. The MP7's processing capability is provided by a Xilinx Virtex-7 FPGA. The MP7 has 144 differential-pairs running at 10Gbps and many more running at the order of 1-2Gbps.  The main source of risk in the design of the MP7 was the sheer number and high speed of the optical links and, as such, the main test of the MP7 is the integrity of the optical links. The links have been validated by loop-back test, both as two sets of 24 links running PRBS-31, and all 48 links simultaneously running 8B10B. Running the links at 10Gbps the MP7 transfers 0.48Tb per second in each direction. To date, the MP7 has transferred in excess of an Exhibit of data without an observed error, giving a limit on the per-board bit-error rate of approximately $3\cdot 10^{-17}$.
+With the specific configuration described above and with a series of small adjustments not mentioned here, CMS was able
+to run smoothly during the 2015 Pb-Pb data-taking with and average L1 rate of 10 kHz. Few hours of the Pb-Pb data-taking
+period were also devoted to explore the limit of the system.  With the 2015  CMS configuration for Pb-Pb, the absolute
+L1 rate limit is of 12 kHz. During the 2015 run, the collision rate was of ~20 kHz. For the 2018 Pb-Pb run and beyond
+the rate limits could significantly impact the expected physics program. On one hand it would be beneficial to increase
+the number of min bias events collected and on the other hand LHC will deliver a higher luminosity. We are considering a
+collision rate of ~30 kHz already for 2018 Pb-Pb run. The CMS subsystems as well as their interaction with the DAQ have
+been studied and a series of bottlenecks were identified. In this proposal the main interest area are specified
+reporting also about the corresponding manpower needs. The preliminary goal is to increase the CMS readout rate to ~30
+kHz. It is however important to bear in mind that this proposal will focus only on aspects that will potentially require
+hardware changed.  The comprehensive series of tasks needed for the overall run preparation is not reported here. 
 
 
-\subsubsection{Algorithms\label{calo:algos}}
-
-Higher granularity input data and more flexibility through modern high-speed electronics 
-allow for improvements in the calorimeter trigger algorithms already at Stage-1.
-
-In heavy ion events the underlying event (UE) depends very strongly on the centrality of collision and it is largely uniform in azimuth but varying strongly in pseudo-rapidity. The level of the UE contribution 
-can be estimated in rings in regions at fixed $\eta$ while using full $\phi$ information. By using iterative baseline estimate
-it is possible to estimate the UE level and find localized energy distributions corresponding to jets. 
-This may be done based on 4x4 tower regions, 
-which would be possible to implement in Stage-1 and improved later 
-with higher granularity and improved jet definitions in the Stage-2 trigger.
-
-\subsection{Stage-1 implementation\label{calo:integration}}
-
-Stage-1 of the upgrade, for operation before all the optical TPGs are
-available, is based on a traditional trigger architecture.  It uses
-the reprogrammed RCT and the oRSC cards to provide 4x4 and 2x1
-clusters of energy and identification bits in the $|\eta<3|$ region.
-These are processed in the MP7 cards.  Eighteen oRSC cards in the
-eighteen RCT crates each provide two fibers of input to each MP7 card.
-Up to five MP7 cards can be used to implement the algorithms discussed
-above.  We envision that one MP7 each is dedicated to the
-e$\gamma\tau$, $\mu$-isolation, jet/sums and heavy-ion algorithm
-implementation. One CTP7 card is also used to receive the sixth set of
-outputs from the oRSC to provide a readout and testing facility for
-the RCT.  Stage-1 also includes two CTP7 cards to receive 36 fibers
-each from the HF $\mu$HTRs.  The clusters identified in the CTP7 cards
-are passed to the MP7 card performing the jet/sums trigger for
-further processing to identify the jets and include in the MET, MHT
-and other sums.  The objects are sorted in the MP7 to select the
-top four candidates of various type and are forwarded to the GT
-for final trigger determination using oGTI link boards.
-
-The traditional trigger architecture is chosen for the Stage-1
-calorimeter trigger upgrade plan.  The current RCT is
-used as layer-1 processor to form the energy clusters.  The RCT will
-be reprogrammed to provide two types of clusters, 4x4-clusters and
-2x1-clusters.  Each RCT crate reports all fourteen 4x4-clusters, which
-are processed by it as 10-bit $E_T$ sums of both ECAL and HCAL
-response and an identification bit, to indicate if the energy is
-electromagnetic or not.  Each RCT crate reports four highest $E_T$
-2x1-clusters, which are reported as 6-bit $E_T$ sums of ECAL and HCAL
-response.  These 2x1-clusters could be locally isolated using the
-nearest neighbor ``L-isolation'' algorithm implemented in the current
-RCT.
-
-The modern $\mu$TCA processors with latest FPGAs (MP7 cards) with
-significant resources will be used in the layer-2 system to receive
-all the RCT data in one card to implement the improved algorithms
-described above.  
-For the forward region of the calorimeter (HF), finer granularity 
-information is available in optical format.  Therefore, a new layer-1 
-system is implemented using two CTP7 cards.  The clusters with finer
-position resolution are used in jet finding in this region.
-
-The layer-2 system computes the pileup contribution event-by-event
-using the 4x4 information.  Algorithms could use a truncated mean
-or statistical median or mode to determine the pileup contribution.
-The pileup contribution will be subtracted from the isolation and
-jet regions.
-
-Mixed use of RCT for HCAL clusters and twelve CTP7 cards for
-electromagnetic clusters provides an option to implement a good
-alternative for the electron/photon/tau triggers, within the
-traditional architecture, although the jet and energy objects remain
-somewhat constrained due to the 4x4-cluster size from RCT.
-
-The Stage-1 system requires RCT information to be transferred to the
-layer-2 processors (MP7s).  The RCT output is reformatted as optical using the optical Regional Summary Cards (oRSC).
-Eighteen oRSC, one per RCT crate, are needed to serve all the data
-to the new layer-2 hardware.  The data is sent on two 6.4 Gbps fibers
-per oRSC. The oRSC is also able to replicate these two fibers worth
-of data six times.  This feature enables the use of separate 
-cards for e$\gamma\tau$, $\mu$ and jet paths enabling significant
-FPGA resources for processing.  The oRSC also has another 10-channel
-optical output operating at 1.6 Gbps to serve the data to the leafcards
-of the GCT, thus replacing the source card system.
-
-The oRSC receives data from the neighboring Jet Summary Card in the
-RCT crate and the data is appropriately conditioned and fed into a Xilinx Kintex
-XC7K325T chip. The firmware will be configured to multiplex the data and serve it out
-in serial format on these outputs.  The logic cells available on this
-chip are also available for pre-computation of some sums, e.g., for
-pileup level determination if needed.
-
-\subsection{Stage-1 Integration Steps}
-
- Since some of the Stage-1 upgrade items,
-especially oSLB and oRM deployment, is disruptive extreme caution is
-necessary before touching the working trigger hardware at P5.
-Therefore, we put together several demonstrators at Wisconsin and
-Prevessin to validate the proposed hardware and firmware solutions
-before dismantling the system for upgrades at the P5.  Since the TPG
-input and full 18-crate RCT system are not possible to replicate
-elsewhere, we use some of the new cards in emulation mode to provide
-input to later layers of hardware/firmware.  Stand-alone testing
-begins at Wisconsin and validated hardware moves to Prevessin, where
-partial integration with the TPG and MP7 systems is possible.  There
-will be two ``full-system'' demonstrator systems, using emulated data
-sources, available at both locations to develop and validate firmware.
-
-Three prototype CTP6 cards will be configured to emulate the entire RCT.
-These three CTP6 cards will be programmed to cycle through data downloaded
-into its memory on thirty six links at 6.4 Gbps.  Therefore, these three
-cards emulate the entire 18-crate RCT with oRSC output.  A fourth CTP6
-card, and at later stages CTP7 or MP7 card, will be used to implement
-the Stage-1 algorithms.  
-
-The firmware will be designed such that the core operation of the cards
-is separated from a sandbox environment in which the algorithms are 
-implemented.  Various groups are expected to contribute to the sandbox
-firmware which implements the algorithm.  This division also enables
-staged development of the algorithms while the actual cards use in
-the fourth stage are changed. 
-
-The CTP7 firmware for the readout of RCT and RCT testing firmware will
-also be implemented at Wisconsin to test the full functionality for operations
-in P5.
-
-The oRSC to CTP6 demonstrator is used to verify the oRSC operation at
-Wisconsin.  One partially filled test RCT crate will be used to drive
-the oRSC so that semi-realistic operation of the system is verified.
-Additional inputs to the CTP6 can be emulated by prototype other CTP6
-cards as described in the 3-to-1 demonstrator.  When the CTP7 card is
-available the test are repeated to verify interoperability of the
-cards.
-
-The oRSC to MP7 demonstrator will be used to verify their
-interoperability in Prevessin.  Two RCT crates with two oRSCs are
-available.  Additional inputs to MP7 at 6.4 Gbps can be emulated by
-other CTP6/CTP7 cards so that mixed mode operation required for
-the HF region, in any case, are tested fully at Prevessin.
-
-The MP7 in this case can also function as an algorithm testbed
-at Prevessin.  We envision that the algorithm firmware developers
-will be able to use this system to fully validate them before
-deployment at P5.
 
 
-The Prevessin environment will also have an ECAL TCC setup with
-oSLBs, RCT with oRMs, HF $\mu$TCA prototypes.  We propose to 
-hook them up to one MP7 board using oRSCs and CTPs.  This provides
-a complete vertical slice test.  Such a test with 5-10\% of the
-channels instrumented completely is necessary before the actual
-system in P5 is dismantled for upgrade of oSLB/oRM system.
+\section{Silicon Pixel Detector\label{sec:SiPixel}}
+A new silicon pixel detector including 4 layers is being installed and commissioned. The detector FE electronics and
+sensors is equivalent to the legacy detector while the whole off detector electronics was redesigned and based on the
+latest FPGA technology (Xilinx virtex-7 family). The new firmware designs takes already into account high multiplicity
+events. However, at present the performance of the latter has not been evaluated in HI multiplicity environment. An
+electronics board with the scope to emulate the detector response was also designed to perform the commissioning of the
+off detector electronics. The pixel group toke the responsibility to use this latter and define as soon as possible the
+pixel operational parameters. A person in the HI group should however act a liaison person and provide the necessary
+information required by the pixel group to perform the emulation. Accordingly, also the results should be evaluated and
+possible solutions identified in case the performances are below expectations. As a rough estimation, a couple of months
+should be enough for this activity.
+
+
+\section{Silicon Strip Tracker\label{sec:SiTracker}}
+In standard p-p collision operation, the tracker detector sends the full detector information to 439 Front End devices
+(FEDs). They apply the common mode noise subtraction and the strip zero suppression. However the common noise
+subtraction algorithm implemented in the tracker FEDs firmware doesn’t allow compensation of the baseline distortion
+observed in high multiplicity HI events. The solution adopted up to now was to bypass the tracker zero suppression in
+the tracker FEDs and implement a specific HI common mode noise subtraction and zero suppression algorithms as a HLT
+process. However, this solution implies and heavy load on the link between the FEDs and the DAQ.  The whole
+interconnection was indeed designed with a maximum of ~ 400 MB/s per FED (two links of 200 MB/s each for heavy load
+FEDs).  Considering that in average fragment size it is at ~32 kB/event. The readout limit is at around 12 kHz. It was
+also already demonstrated that the FED is designed to sustain up to 520 MB/s. In this optic the only solutions available
+are either to increase the number of links between the tracker FEDs and the DAQ or to reduce the data payload. The first
+solution appear to be too complicated adding other ~400 links. Apart the technical constraints, there would also not be
+enough time to install and commission the links during the EYTS. The second option is to reduce the data payload. A FED
+firmware version implemented already in 2015 allows the reduction from 10 to 8 the number of bits readout by each strip
+ADC. However, this strategy would allow moderate increase of < 20 % of the overall L1 rate at the cost of a reduction of
+the detector resolution/sensitivity. At present there are not conclusive studies on the effects of this change on the
+overall tracking efficiency. The second strategy considered is to modify the FEDs firmware including a more refined
+common mode subtraction algorithm accounting for baseline distortion.  At present this strategy is considered to be the
+preferable considering the rate increase obtained. The system could run at > 50 kHz. The tracker FEDs are based on
+Xilinx Virtex-2 FPGA that is quite limited in term of on chip resources as well as clock frequency. This limitation
+implies that only algorithm designed with specific attention could be implemented in the FEDs FPGA. It also implies that
+the FED firmware development should be branched between p-p and Pb-Pb operation not having enough on-chip resources to
+maintain both features. In 2013 a specific HI zero suppression algorithm designed for high multiplicity environment and
+that would satisfy the FPGA constraints was designed offline and it is named “baseline follower”.  Preliminary studies
+performed by the tracker and HI groups showed promising performance results for the algorithm. The first part of the
+project requires the detailed study of the algorithm offline. It will imply roughly 3 months of work and detailed
+clustering and tracking studies. Hardware feasibility studies are going to be performed in parallel by tracker
+engineers. During this phase the HI group should participate in providing the required information but the amount of
+work could not be quantified yet. In the late spring/early summer 2017 the project will be handed over completely to the
+HI group where a developer will implement the actual algorithm in firmware. We estimate that the activity of coding will
+last between 6 and 8 months. Afterwards, three months commissioning time including tests on the bench and test at P5
+should be considered. This schedule should leave some resources available for the actual 2018 HI run preparation. At
+present the tracker group is focusing on the tracker operation during p-p collisions and the tracker upgrade project. In
+this optic, a significant fraction of the work required for this project will need to fall under the HI group
+responsibility as mentioned above. 
+
+
+\section{ECAL\label{sec:ECAL}} 
+The ECAL off detector electronics (DCC) was designed to cope with a L1 rate of 100 kHz and an average event size of 2
+kB/event.  During p-p high-pu collisions the average event size is at around 1.5 – 1.8 kB/event. However, during Pb-Pb
+collisions, the average event size is of 15-20 kB/event (depending by the trigger mix) and it is up to 34 kB/event for
+central PbPb collisions. With so big event sizes, the L1 rate tolerated is up to 12 kHz. In the specific ECAL case, the
+hardware limits can be identified in two main areas: the link between ECAL DCC and DAQ, and the internal DCC speed.  The
+links to DAQ are standard S-Link designed for 200 MB/s. For the 2017 run an upgrade of the mezzanine card on the DCC
+side including a bigger buffer is already planned. This upgrade should allow an increase of 10% in the total L1 rate.
+Also the increase of clock frequency on the mezzanine card could be considered but the benefits are still to be
+evaluated. The second limit encountered is the actual DCC internal speed firmware speed. An increase of 50 % (maybe also
+100 %) in speed can be achieved modifying the internal DCC firmware structure allowing the firmware to run at a higher
+clock frequency. The ECAL group engineers gave already their availability to participate and supervise the project.
+However, the concrete implementation should be responsibility of the HI group. A person should be dedicated to the
+project for roughly 6 months. Before envisaging the firmware change hypothesis, there are other two configurations that
+should be evaluated. The ECAL group is already studying the calorimeter performance adjusting the Selective Readout and
+Zero Suppression threshold. It is not clear yet how much the new settings could influence the event size for Pb-Pb
+collisions but definitively a benefit could be directly obtained. On the same line, the ECAL event size could be reduced
+up to 40 % reducing the number of samples collected for each event. At present the ECAL reads out 10 BX for each event
+and this number can be programmed down to a minimum of 6 BX. However, reducing the number of samples could have strong
+implication in the energy resolution. A complete study should be performed to understand how significant could be the
+effect of x-fit in Pb-Pb collisions and the consequently effects on the physics program. Considering the amount of work
+required for the offline studies mentioned above, we should allocate a person for one year to the project. Any of the
+two offline solutions mentioned above indeed require specific performance studies and also the implementation of CMSSW
+code for the eventually new configuration. Also the calorimeter calibrations should be re-derived. 
+
+\section{L1 trigger\label{sec:L1Trigger}}
+For the 2015 Pb-Pb run an upgraded L1 trigger system was designed. The Stage-1 L1 trigger was operated with specific HI
+algorithms. However, in the middle of 2016 the full trigger upgrade (referred as Stage-2 in previous proposals) was
+installed and commissioned. The upgraded trigger system has a new layer-1 and the single MP7 board layer-2 was replaced
+with 9 MP7 boards operating with a time-multiplexed architecture. Also the firmware was completely redesigned by the L1
+team including a series of new algorithm specific to p-p collision operation. In this optics, it is mandatory for the
+2018 run to port to the new system the specific HI algorithm. In the list we have a specific background subtraction,
+centrality triggers, single-track triggers and Q2 triggers. It was agreed with the L1 team that the stage-2 engineers
+would take care of the actual firmware implementation and commissioning. However, it will be responsibility of the HI
+group to provide support. It includes the performance studies of the algorithms and a specific description of the
+implementation. Furthermore some of the several tests on the bench or at P5 will be performed by the HI group. Also the
+compilation of the L1 and HLT menus will remain responsibility of the HI group. In term of manpower, it should be
+considered a person for 6 months to follow the implementation process of the layer-2 and uGT firmware as well as
+performing the performance studies needed for the algorithm implementation. The preparation of the L1 menu could be
+considered as part of this time. 
+
+
+
+
 
