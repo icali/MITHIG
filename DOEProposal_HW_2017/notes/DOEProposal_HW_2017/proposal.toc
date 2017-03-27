@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}Physics motivation}{2}
+\contentsline {subsection}{\numberline {2.1}Nuclear Modification Factors of Heavy Flavor Mesons}{3}
+\contentsline {subsection}{\numberline {2.2}Ellipic Flow of Heavy Flavor Mesons}{3}
+\contentsline {subsection}{\numberline {2.3}$D^0$-Jet and $D^0$-hadron correlations}{4}
+\contentsline {section}{\numberline {3}Hardware Introduction}{5}
+\contentsline {section}{\numberline {4}ECAL}{7}
+\contentsline {section}{\numberline {5}Silicon Pixel Detector}{8}
+\contentsline {section}{\numberline {6}Silicon Strip Tracker}{8}
+\contentsline {section}{\numberline {7}L1 trigger}{9}
+\contentsline {section}{\numberline {8}Dataflow}{10}
+\contentsline {section}{\numberline {9}Management Plan, Personnel, Schedule}{10}
+\contentsline {section}{\numberline {10}Budget}{11}

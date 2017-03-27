@@ -1,5 +1,5 @@
 
-BATCHMODE=0
+BATCHMODE=1
 #
 
 rm *.aux
