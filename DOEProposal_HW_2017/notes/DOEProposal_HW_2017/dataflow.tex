@@ -1,3 +1,16 @@
 \newpage
 
 \section{Dataflow\label{sec:dataflow}}
+In the previous sections of the proposal it was discussed the possibility of increasing the CMS readout rate for HI collisions. However, in the specific case of the 2018 HI run and beyond, the increase of L1 rate is not required for a more complete sample and selection at HLT but rather to record an high number of minimum bias events and enrich the samples on tape. This approach impose also touching also few main areas discussed below.
+
+
+\subsection{Data transfer from HLT to Storage Manager\label{subsec:hltSM}}
+The CMS High Level Trigger (HLT) outputs the selected events to a Lustre based system named Storage Manager (SM). The Storage Manager receives data from the HLT, buffers them and as soon as there are enough resources available, the data are sent to the Tier-0.  
+After the 2015 PbPb run an hardware upgrade of the SM was performed and at today the overall I/O to disk is of ~ 9GB/s and with a total buffer space of ~500 TB. These parameters are actually critical because they are defining the maximun rate/number of events that can be stored to disk after HLT selection. Two aspects needs to be investigated to increase the system performance: increase of bandwith from HLT to SM and  reduction of event size.
+
+ 
+Considering that the average minimum bias event size is of ~ 0.5 MB/ev. the overall rate of events to disk would 
+During the 2016 pPb run it was demonstrated that the actual maximum writing overall bandwith is of 6.5 GB/s. The SM itself could also devote an higher writing speed reaching the limit of 7.5-8 GB/s, however the network between the Builder Units (BU) and the SM itself saturates at the 6.5 GB/s mentioned above.  
+\subsection{Tier-0 data buffering and prompt reconstruction\label{subsec:Tier-0}}
+
+\subsection{Overall tape requirement for data storage and processing power\label{subsec:processing}} 
