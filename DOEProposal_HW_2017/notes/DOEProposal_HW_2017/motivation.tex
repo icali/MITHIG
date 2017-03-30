@@ -27,8 +27,10 @@ of b-decays and b-jets.
 energy loss because of the larger color factors. This effect can be studied using three-jet events.
 \item Measurements of the single particle azimuthal anisotropy at very high \pt\ give access to the in-medium path-length 
 dependence of energy loss. The azimuthal anisotropy as a function of charged particle \pt\ also yields 
-important information about the parton energy dependence of the energy loss. At very low~\pt\ region thcxx
+important information about the parton energy dependence of the energy loss. 
+\item Jet-heavy flavor meson correlation
 \end{enumerate}
+
 
 These and other measurements rely on a sufficiently selective jet and heavy flavor meson trigger to provide access to the 
 full delivered luminosity and a large minimum-bias sample.  Data collected during the 2015 PbPb run were used to estimate physics reach  
@@ -58,13 +60,22 @@ scales.}
 \subsection{Nuclear Modification Factors of Heavy Flavor Mesons}
 {\bf [To be updated]}
 
-One of the proposed observables that reveal the flavor dependence of in-medium parton energy loss is the reduction of heavy flavor meson yield. This can be studied by measurements of nuclear modification factors (RAA), defined as the ratio of the yield in nucleus-nucleus collisions to that observed in pp collisions, scaled by the number of binary nucleon-nucleon collisions. Examples of theoretcal calculations of $R_{AA}$ for D and B mesons are shown in Figure~\ref{}. 
+One of the proposed observables that reveal the flavor dependence of in-medium parton energy loss is the reduction of heavy flavor meson yield. This can be studied by measurements of nuclear modification factors ($R_{AA}$), defined as the ratio of the yield in nucleus-nucleus collisions to that observed in pp collisions, scaled by the number of binary nucleon-nucleon collisions. Examples of theoretcal calculations of $R_{AA}$ for D and B mesons are shown in Figure~\ref{fig:RAA_theory}. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=.90\textwidth]{figures/cTheoryRAA_BD_v1.pdf}
 \caption{Theoretical calculations of nuclear modification factors of charged particles, $D^0$ and $B^+$ mesons.}
-\label{fig:aj_2015}
+\label{fig:RAA_theory}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.45\textwidth]{InvMassFigures/Ds.png}
+\includegraphics[width=.45\textwidth]{InvMassFigures/LambdaC.png}
+\caption{Invariant mass distributions}
+\label{fig:HFmMsonMass}
 \end{center}
 \end{figure}
 
@@ -88,54 +99,59 @@ One of the proposed observables that reveal the flavor dependence of in-medium p
 \end{center}
 \end{figure}
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.90\textwidth]{figures/cV2_lumiMB_1.pdf}
+\caption{V2 measurement.}
+\label{fig:aj_2015}
+\end{center}
+\end{figure}
+
+
 
 \subsection{$D^0$-Jet and $D^0$-hadron correlations}
 
-\begin{figure}[!ht]
-\begin{center}
-%\includegraphics[width=.60\textwidth]{fig/heavyIon//r32_2015.pdf}
-\caption{The ratio of 3-jet to 2-jet events ($R_{32}$ )as a function of the
-average \pt\ of the two leading jets for \pt\ $> $ 100 GeV/c 
-in the ten percent most central collisions expected in the 2015 PbPb Run.}
-\label{fig:r32_2015}
-\end{center}
-\end{figure}
 
-\begin{figure}[!ht]
-\begin{center}
-%\includegraphics[width=.50\textwidth]{fig/heavyIon//HighPtTrackReach_xTscaling_20121216.pdf}
-\caption{Track \pt\ distribution for 2.76 TeV PbPb in 2011 with a total
-integrated luminosity
-         of 150$\mu$b$^{-1}$ (solid black), projection to 5.5 TeV in 2015
-based on $x_T$ scaling 
-         without upgraded L1 trigger (open red), and with upgraded L1
-trigger (solid red).}
-\label{fig:xT_scaling}
-\end{center}
-\end{figure}
+\subsection{Summary}
 
-\begin{figure}[!ht]
+\begin{table}[hbt]
 \begin{center}
-%\includegraphics[width=.48\textwidth]{fig/heavyIon//JetvsTrack_PU1_centmin0_centmax12_20130214.pdf}
-%\includegraphics[width=.48\textwidth]{fig/heavyIon/efficiency_trackpt_PU1_centmin0_centmax12_20130214.pdf}
-\caption{Leading L1 jet $E_T$, with upgraded L1 system, vs leading track
-\pt\ in 0-30\% PbPb collisions
-at 2.76 TeV (left), and efficiency turn-on curve as a function of leading
-track \pt\ for L1 jet $E_T$
-thresholds of 40, 50 and 60 GeV (right).}
-\label{fig:trigEff_track2015_central}
-\end{center}
-\end{figure}
+\begin{tabular}{ |c|c|c|c|c| } 
 
-\begin{figure}[!ht]
-\begin{center}
-%\includegraphics[width=.48\textwidth]{fig/heavyIon//JetvsTrack_PU1_centmin16_centmax40_20130214.pdf}
-%\includegraphics[width=.48\textwidth]{fig/heavyIon//efficiency_trackpt_PU1_centmin16_centmax40_20130214.pdf}
-\caption{Leading L1 jet $E_T$, with upgraded L1 system, vs leading track
-\pt\ in 40-100\% PbPb collisions
-at 2.76 TeV (left), and efficiency turn-on curve as a function of leading
-track \pt\ for L1 jet $E_T$
-thresholds of 40, 50 and 60 GeV (right).}
-\label{fig:trigEff_track2015_peripheral}
+
+
+\cline{1-5}
+\multicolumn{5}{|c|}{\textbf{Measurements of Current Pixel System and 2018 Pixel System} }\\
+ \cline{1-5}
+     &   \multicolumn{2}{p{6cm}|}{ \textbf{Current 0.04 $nb^{-1}$ + Legacy Pixel System}}  & \multicolumn{2}{p{6cm}|} {\textbf{2018 PbPb 1 $nb^{-1}$ + Pixel Upgrade}} \\
+            \cline{1-5}
+\hline
+Observables & $p_T$ min & Statistical Uncertainty & $p_T$ min & Statistical Uncertainty  \\
+\hline
+$D^0 R_{AA}$ & 2 & 15\% & 0.5 - 1 & 10\% \\
+\hline
+$D_s R_{AA}$ & $\sim$ 4 & 20\% & $<$ 4  & 4\% \\
+\hline
+$\Lambda_c R_{AA}$ & 10 & $>$ 20\% & $<$ 10 & 4\% \\
+\hline
+$B \rightarrow D R_{AA}$ & 6 & 20\% & 2 & 10\% \\
+\hline
+$B^+ (D^0 \pi) R_{AA}$ & Not accessible & & $\sim$ 4 & \\
+\hline
+Low $p_T $ c and b jets & Not accessible &  &  & \\
+\hline
+$D^0 v_2$ (= 0.06) & 1 & 80\% & 0.5 - 1 & 18\% \\
+\hline
+$D_s v_2$ & Not accessible &  & $\sim$ 4 &  \\
+\hline
+$B \rightarrow D v_2$ & Not accessible &  & $\sim$ 2 &  \\
+\hline
+$\Lambda_c v_2$ & Not accessible &  & $\sim$ 6 &  \\
+\hline
+
+\end{tabular}
 \end{center}
-\end{figure}
+\caption{L1 trigger upgrade funding profile, in K\$}
+\label{OpCost}
+\end{table}
+
