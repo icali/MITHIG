@@ -8,9 +8,23 @@ In the previous sections of the proposal it was discussed the possibility of inc
 The CMS High Level Trigger (HLT) outputs the selected events to a Lustre based system named Storage Manager (SM). The Storage Manager receives data from the HLT, buffers them and as soon as there are enough resources available, the data are sent to the Tier-0.  
 After the 2015 PbPb run an hardware upgrade of the SM was performed and at today the overall I/O to disk is of ~ 9GB/s and with a total buffer space of ~500 TB. These parameters are actually critical because they are defining the maximun rate/number of events that can be stored to disk after HLT selection. Two aspects needs to be investigated to increase the system performance: increase of bandwith from HLT to SM and  reduction of event size.
 
- 
-Considering that the average minimum bias event size is of ~ 0.5 MB/ev. the overall rate of events to disk would 
-During the 2016 pPb run it was demonstrated that the actual maximum writing overall bandwith is of 6.5 GB/s. The SM itself could also devote an higher writing speed reaching the limit of 7.5-8 GB/s, however the network between the Builder Units (BU) and the SM itself saturates at the 6.5 GB/s mentioned above.  
-\subsection{Tier-0 data buffering and prompt reconstruction\label{subsec:Tier-0}}
+\subsubsection{HLT SM upgrade\label{subsec:hltSMupgrade}}
+During the 2016 pPb run it was demonstrated that a sustainable writing bandwith to SM is of 6.5 GB/s. The SM itself could also reach an higher writing speed using almost the total I/O bandwith. However each Builder Units (BUs), that represent the final HLT/DAQ stage before SM,  are limited by the interconnection network at ~ 100 MB/s each. Considering that in the system there are a total of 72 BUs and that on the same networt also the data arriving from the HLT are transferred, the saturation at the 6.5 GB/s mentioned above is the actual hard limit of the system. Considering that the average minimum bias event size is of ~ 0.5 MB/ev. the overall rate of events to disk would be at a maximum of ~13 kHz. 
 
+One possibility being investigated is to further upgrade the DAQ/SM system. There are three main actions that theoretically could be taken. Increase the number of BUs and re-adjust the switching systems between BU and SM. The latter could require the minimum hardware investment, however, it is already known that the performance increase will be minimal. The upgrade of the BU number is only limited now but the actual rack space availability at P5. At present there is no clear estimation of the cost required for the hardare upgrade but it should be taken into consideration as a possibility for the next fiscal year. 
+
+Once the limit described above are overcome, a further bandwidth increase could be obtained upgrading further the SM. 
+
+\subsubsection{event size reduction\label{subsec:hltSMupgrade}}
+While in the previos section it was described how to potentially increase the bandwidth from HLT to SM, in this section it is approached the subject of reducing the actual event size. It comes without saying that this approach is not only beneficial for increasing the throughput to SM but also to reduce the overall data volume on disk. 
+
+The first parameter that is taken under consideration is obviously the root compression level applied in HLT. However, the effect expected are of the order of few percent considering that we are already running with a factor 7 on a scale of 9. 
+
+A second aspect that it is taken into consideration is to creata a new event data content for RAW data. Only a fraction of the CMS detector could be stored in the event reducing the overall event size of a factor 2 or 3. This solution is definitively the most promising but it has significant drawbacks. All the information stripped from the event cannot be recovered. The new event content should also be general enough to foresee any future analysis of these data. At present the most prominent idea is to have the HLT to produce to main data streams. The first data stream would contain events in standard CMS event data format while the second data stream would contain events where only a substet of the tracker and pixel FEDs informations are recorded. This latter data format will be used only for minimum bias events while the first data format will be used for all the other triggered events. The overall trigger mix decided in the future will define the exact size of the average data size but rough estimation indicated a reduction of ~30 \% in the overall data size. 
+
+Another solution being investigated is to have a similar approach to the one described above but to replace the specific minimum bias data data format with already processed objects. In this case, the HLT calculates tracks for minimum bias events and instead of outputting the RAW data format, the computed tracks objects are instead outputted. Preliminary studies demonstrates than this approach could reduce further the data size. However, the tracks reconstruction in HLT would be performed using online conditions of detector allignement and calibrations contemplating the possibility of have a lower tracking efficiency as well as an high fake rate. 
+
+
+\subsection{Tier-0 data buffering and prompt reconstruction\label{subsec:Tier-0}}
+The overall data volume
 \subsection{Overall tape requirement for data storage and processing power\label{subsec:processing}} 
