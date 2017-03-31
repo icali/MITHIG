@@ -1,5 +1,6 @@
+#!/bin/sh
 
-BATCHMODE=0
+BASHMODE=${1:-0}
 #
 
 rm *.aux
@@ -12,13 +13,13 @@ pdflatex proposal.tex
 pdflatex proposal.tex
 #cp proposal.pdf ~/Dropbox/tmp
 
-if [ $BATCHMODE -eq 1 ]; then
+if [ $BASHMODE -eq 0 ]; then
+    evince proposal.pdf
+    open proposal.pdf
+else
     echo
     echo "----------------------------------------------------------------------------"
     echo " PDF Output file: ${PWD}/proposal.pdf"
     echo "----------------------------------------------------------------------------"
     echo
-else
-    evince proposal.pdf
-    open proposal.pdf
 fi
