@@ -25,6 +25,19 @@ A second aspect that it is taken into consideration is to creata a new event dat
 Another solution being investigated is to have a similar approach to the one described above but to replace the specific minimum bias data data format with already processed objects. In this case, the HLT calculates tracks for minimum bias events and instead of outputting the RAW data format, the computed tracks objects are instead outputted. Preliminary studies demonstrates than this approach could reduce further the data size. However, the tracks reconstruction in HLT would be performed using online conditions of detector allignement and calibrations contemplating the possibility of have a lower tracking efficiency as well as an high fake rate. 
 
 
-\subsection{Tier-0 data buffering and prompt reconstruction\label{subsec:Tier-0}}
-The overall data volume
-\subsection{Overall tape requirement for data storage and processing power\label{subsec:processing}} 
+\subsection{Tier-0 data buffering, prompt reconstruction and data tape requirement\label{subsec:Tier-0AndProcessing}}
+As discussed in previous sections the overall data volume has strong impact on the overall tape/disk space requirement and processing time. It is not part of the scoper= of this proposal to discuss the requirements for the the computing infrastructure. However, in this section are reported some main aspects that should be kept in mind for the run preparation and that will require proper and careful thinking and manpower before the 2018 run.
+
+Without any action taken on the data format, around 6-8 PB of data will be produced during the 2018 run. The CMS computing structure foresees that the RAW data in streamer format are shipped by P5 to a Tier-0 streamer pool based on EOS file system at CERN. The streamer files are merged and repacked to produce RAW files in ROOT format that will be stored for good. Once the rapacking has finished, the data files are sent to custodial sites and also the prompt reconstruction step is started. At present the Tier-0 is able to repack raw data with a speed of 1.5 GB/s. This already implies that the some studies should be performed on the feasibility to increase the repack speed as well as properly calibrate the streamer buffer. Also the managing of the data should be adjusted properly. Without a correct data handling indeed there is the possibility that the fast feedbacks provided from the prompt reco would be delayed of several days. Data parking should also be considered as an option for the minimum bias datasets
+
+A second aspect to be carefully considered is the overall tape availability for the CMS HI program. With the work discussed in this proposal, the only real bottleneck on the overall CMS program is it the overal tape availability. Possible solutions involving the storage of only RAW data plus miniAOD are being and should be considered.
+
+A there aspect that should be taken carefully in account is the data accessibility and data re-processing. At peresent, the Fermilab Tier-1 where the data are stored on tape is not being used to perform any data processing. Tier-2s and in particulate the Vanderbilt one are used for data re-processing. However, already at present, there is not enough disk space available to host a full dataset of RAW data and the corresponding outputs. The operation procedure used at present foresees the copy of a part of dataset to the processing site, a partial processing followed by the deletion of the original sample to reserve space for the transfer of extra data to be processed. With this configuration, already over a month is required to process a minimum bias dataset collected during the 2015 running period. Some manpower should be invested in investigating potential solution to the problem. Clearly having more disk space and more CPU power on dedicated HI processing sites would be extremely beneficial. 
+
+
+
+
+
+
+
+%\subsection{Overall tape requirement for data storage and processing power\label{subsec:processing}} 
