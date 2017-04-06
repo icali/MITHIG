@@ -1,48 +1,11 @@
 \subsection{Silicon Pixel Detector\label{subsec:SiPixel}}
-A new silicon pixel detector including 4 layers is being installed and commissioned. The detector FE electronics and
-sensors is equivalent to the legacy detector while the whole off detector electronics was redesigned and based on the
-latest FPGA technology (Xilinx virtex-7 family). The new firmware designs takes already into account high multiplicity
-events. However, at present the performance of the latter has not been evaluated in HI multiplicity environment. An
-electronics board with the scope to emulate the detector response was also designed to perform the commissioning of the
-off detector electronics. The pixel group toke the responsibility to use this latter and define as soon as possible the
-pixel operational parameters. A person in the HI group should however act a liaison person and provide the necessary
-information required by the pixel group to perform the emulation. Accordingly, also the results should be evaluated and
-possible solutions identified in case the performances are below expectations. As a rough estimation, a couple of months
-should be enough for this activity.
+A new silicon pixel detector including 4 layers is being installed and commissioned for the 2017 p-p run. The detector front end electronics and sensors are equivalent to the ones installed in the legacy detector. The whole off-detector electronics was re-designed and the FEDs are based on the latest Xilinx FPGA technology (Virtex-7). The new firmware designs takes already into account high multiplicity events. However, at present the performance of the FED has not been evaluated in HI multiplicity environment. 
+
+An electronics board with the scope to emulate the detector response was designed to perform the commissioning of the off-detector electronics. The test board is able to receive as input a set files with the hit positions and produces at its output link a response equivalent to the one of the actual FE electronics. The pixel group took the responsibility to use the test board and define as soon as possible the pixel operational parameters for Pb-Pb collisions. However, a person in the HI group should act a liaison person and provide the necessary information required by the pixel group to perform the emulation. The liaison person should alse supervise the test phases to guarantee a perfect adherence with the actual expected condition during collisions. The results of the emulations should be evaluated carefully and possible solutions identified in case the performances are below expectations. In the case in which the pixel FEDs are underperforming, it is possible that dedicated FW changes will be required. The time required to the liaison person could be as short as a couple of months. However, it is important to bare in mind that if a new FW relise cycle is required, the actual manpower investment could be be also of several months. 
 
 
 \subsection{Silicon Strip Tracker\label{subsec:SiTracker}}
-In standard p-p collision operation, the tracker detector sends the full detector information to 439 Front End devices
-(FEDs). They apply the common mode noise subtraction and the strip zero suppression. However the common noise
-subtraction algorithm implemented in the tracker FEDs firmware doesn’t allow compensation of the baseline distortion
-observed in high multiplicity HI events. The solution adopted up to now was to bypass the tracker zero suppression in
-the tracker FEDs and implement a specific HI common mode noise subtraction and zero suppression algorithms as a HLT
-process. However, this solution implies and heavy load on the link between the FEDs and the DAQ.  The whole
-interconnection was indeed designed with a maximum of ~ 400 MB/s per FED (two links of 200 MB/s each for heavy load
-FEDs).  Considering that in average fragment size it is at ~32 kB/event. The readout limit is at around 12 kHz. It was
-also already demonstrated that the FED is designed to sustain up to 520 MB/s. In this optic the only solutions available
-are either to increase the number of links between the tracker FEDs and the DAQ or to reduce the data payload. The first
-solution appear to be too complicated adding other ~400 links. Apart the technical constraints, there would also not be
-enough time to install and commission the links during the EYTS. The second option is to reduce the data payload. A FED
-firmware version implemented already in 2015 allows the reduction from 10 to 8 the number of bits readout by each strip
-ADC. However, this strategy would allow moderate increase of < 20 % of the overall L1 rate at the cost of a reduction of
-the detector resolution/sensitivity. At present there are not conclusive studies on the effects of this change on the
-overall tracking efficiency. The second strategy considered is to modify the FEDs firmware including a more refined
-common mode subtraction algorithm accounting for baseline distortion.  At present this strategy is considered to be the
-preferable considering the rate increase obtained. The system could run at > 50 kHz. The tracker FEDs are based on
-Xilinx Virtex-2 FPGA that is quite limited in term of on chip resources as well as clock frequency. This limitation
-implies that only algorithm designed with specific attention could be implemented in the FEDs FPGA. It also implies that
-the FED firmware development should be branched between p-p and Pb-Pb operation not having enough on-chip resources to
-maintain both features. In 2013 a specific HI zero suppression algorithm designed for high multiplicity environment and
-that would satisfy the FPGA constraints was designed offline and it is named “baseline follower”.  Preliminary studies
-performed by the tracker and HI groups showed promising performance results for the algorithm. The first part of the
-project requires the detailed study of the algorithm offline. It will imply roughly 3 months of work and detailed
-clustering and tracking studies. Hardware feasibility studies are going to be performed in parallel by tracker
-engineers. During this phase the HI group should participate in providing the required information but the amount of
-work could not be quantified yet. In the late spring/early summer 2017 the project will be handed over completely to the
-HI group where a developer will implement the actual algorithm in firmware. We estimate that the activity of coding will
-last between 6 and 8 months. Afterwards, three months commissioning time including tests on the bench and test at P5
-should be considered. This schedule should leave some resources available for the actual 2018 HI run preparation. At
-present the tracker group is focusing on the tracker operation during p-p collisions and the tracker upgrade project. In
-this optic, a significant fraction of the work required for this project will need to fall under the HI group
-responsibility as mentioned above. 
+In standard p-p collision operation, the tracker detector sends the full detector information to 439 Front End Devices (FEDs). They apply the common mode noise subtraction and the strip zero suppression. However the common noise subtraction algorithm implemented in the tracker FEDs firmware doesn’t allow compensation of the baseline distortion observed in presence of Highly Ionizing Particles (HIP) with the consequent potential loss of clusters associated to the interested readout chip named APV. Due to the stringent requirements on tracking for high multiplicity HI events, this effect
+
+
+The solution adopted up to now was to bypass the tracker zero suppression in the tracker FEDs and implement a specific HI common mode noise subtraction and zero suppression algorithms as a HLT process. However, this solution implies and heavy load on the link between the FEDs and the DAQ.  The whole interconnection was indeed designed with a maximum of ~ 400 MB/s per FED (two links of 200 MB/s each for heavy load FEDs).  Considering that in average fragment size it is at ~32 kB/event. The readout limit is at around 12 kHz. It was also already demonstrated that the FED is designed to sustain up to 520 MB/s. In this optic the only solutions available are either to increase the number of links between the tracker FEDs and the DAQ or to reduce the data payload. The first solution appear to be too complicated adding other ~400 links. Apart the technical constraints, there would also not be enough time to install and commission the links during the EYTS. The second option is to reduce the data payload. A FED firmware version implemented already in 2015 allows the reduction from 10 to 8 the number of bits readout by each strip ADC. However, this strategy would allow moderate increase of $\le 20 \%$ of the overall L1 rate at the cost of a reduction of the detector resolution/sensitivity. At present there are not conclusive studies on the effects of this change on the overall tracking efficiency. The second strategy considered is to modify the FEDs firmware including a more refined common mode subtraction algorithm accounting for baseline distortion.  At present this strategy is considered to be the preferable considering the rate increase obtained. The system could run at > 50 kHz. The tracker FEDs are based on Xilinx Virtex-2 FPGA that is quite limited in term of on chip resources as well as clock frequency. This limitation implies that only algorithm designed with specific attention could be implemented in the FEDs FPGA. It also implies that the FED firmware development should be branched between p-p and Pb-Pb operation not having enough on-chip resources to maintain both features. In 2013 a specific HI zero suppression algorithm designed for high multiplicity environment and that would satisfy the FPGA constraints was designed offline and it is named “baseline follower”.  Preliminary studies performed by the tracker and HI groups showed promising performance results for the algorithm. The first part of the project requires the detailed study of the algorithm offline. It will imply roughly 3 months of work and detailed clustering and tracking studies. Hardware feasibility studies are going to be performed in parallel by tracker engineers. During this phase the HI group should participate in providing the required information but the amount of work could not be quantified yet. In the late spring/early summer 2017 the project will be handed over completely to the HI group where a developer will implement the actual algorithm in firmware. We estimate that the activity of coding will last between 6 and 8 months. Afterwards, three months commissioning time including tests on the bench and test at P5 should be considered. This schedule should leave some resources available for the actual 2018 HI run preparation. At present the tracker group is focusing on the tracker operation during p-p collisions and the tracker upgrade project. In this optic, a significant fraction of the work required for this project will need to fall under the HI group responsibility as mentioned above. 
