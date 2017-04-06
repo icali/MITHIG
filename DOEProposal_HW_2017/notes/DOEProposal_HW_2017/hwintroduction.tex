@@ -1,29 +1,25 @@
-\newpage
-
-\section{Hardware Introduction\label{sec:HWintro}}
-The CMS experiment is mainly designed to record high luminosity, high-PU proton-proton collisions events.  However, with
-several detectors tweaks/configuration changes, over the last several years, the CMS experiment has been able to record
-successfully also the high multiplicity Heavy-Ions collisions delivered by LHC. As discussed already in previous
+\subsection{Hardware Upgrade\label{subsec:HWintro}}
+The CMS experiment is mainly designed to record high luminosity, high-PU proton-proton collisions events.  However, with several detectors tweak/configuration changes, over the last several years, the CMS experiment has been able to record successfully also the high multiplicity Heavy-Ions collisions delivered by the LHC. As discussed already in previous
 proposals, the main changes required to allow CMS to operate in HI environments could be summarized as follows:
 
 \begin{itemize}
-\item Dedicated Silicon Pixel Front End device firmware for high multiplicity environment. 
-\item The Silicon Tracker zero suppression were bypassed and all the channels information were forwarded to the CMS DAQ system. The Zero Suppression was performed in HLT. A new tracker FED firmware was also designed to reduce the event payload of ~30% without information loss. 
-\item DAQ reconfiguration / rebalance to deal with big data volumes and high throughput. In standard p-p collisions operation, an average event size correspond to ~ 1- 1.5 MB/even. During Pb-Pb collision operation, the average event size is at around 17 MB/event. 
-\item The Level-1 trigger firmware was redesigned to perform a dedicated underlying event subtraction algorithm and to include specific HI algorithms 
-\item Significant adjustment in the overall CMS dataflow
+\item A dedicated silicon pixel Front End Device (FED) firmware for high multiplicity environment. The overall FED data flow has been re-designed changing the readout schema of the input links and a redistribution of internal buffers.
+ 
+\item The silicon tracker zero suppression was bypassed and all the channels information were forwarded to the CMS DAQ system. The Zero Suppression was performed in HLT. A new tracker FED firmware was also designed to reduce the event payload of $\sim 30 \%$ without information loss. The reduction was obtained stripping out from the standard dataformat unused information.  
+
+\item DAQ reconfiguration / rebalance to deal with big data volumes and high throughput. In standard p-p collisions operation, an average event size correspond to $\sim 1-1.5$ MB/even. During Pb-Pb collision operation, the average event size is at around 17 MB/event. 
+
+\item The Level-1 trigger firmware was redesigned to perform a dedicated underlying event subtraction algorithm and to include specific HI algorithms.
+
+\item Significant adjustment in the overall CMS dataflow.
 \end{itemize}
 
 
-With the specific configuration described above and with a series of small adjustments not mentioned here, CMS was able
-to run smoothly during the 2015 Pb-Pb data-taking with and average L1 rate of 10 kHz. Few hours of the Pb-Pb data-taking
-period were also devoted to explore the limit of the system.  With the 2015  CMS configuration for Pb-Pb, the absolute
-L1 rate limit is of 12 kHz. During the 2015 run, the collision rate was of ~20 kHz. For the 2018 Pb-Pb run and beyond
-the rate limits could significantly impact the expected physics program. On one hand it would be beneficial to increase
-the number of min bias events collected and on the other hand LHC will deliver a higher luminosity. We are considering a
-collision rate of ~30 kHz already for 2018 Pb-Pb run. The CMS subsystems as well as their interaction with the DAQ have
-been studied and a series of bottlenecks were identified. In this proposal the main interest area are specified
-reporting also about the corresponding manpower needs. The preliminary goal is to increase the CMS readout rate to ~30
-kHz. It is however important to bear in mind that this proposal will focus only on aspects that will potentially require
-hardware changed.  The comprehensive series of tasks needed for the overall run preparation is not reported here. 
+With the specific configuration described above, and with a series of other small adjustments not mentioned here, CMS was able to run smoothly during the 2015 Pb-Pb data-taking with an average L1 rate of $\sim 10$ kHz. Few hours of the Pb-Pb data-taking
+period were also devoted to explore the limit of the CMS in term of maximum L1 rate allowed.  With the 2015 CMS configuration for Pb-Pb, the absolute L1 rate limit is of 12 kHz. In the next sections this limit as well as solutions to increase it will be discussed. 
+
+During the 2015 run, the collision rate was of $\sim 20$ kHz. For the 2018 Pb-Pb run and beyond the rate limit could significantly impact the physics program. It is expected already for the 2018 Pb-Pb run an increase of collision rate up to $\sim 30$ kHz. Without applying any changes to the L1 trigger mix used in 2015, this extra factor would mean to operate CMS at above its limits. On the other hand, as discussed in the previous sections, it would be beneficial to also further increase the number on minimum bias events collected. This latter is an extra reason to pass the CMS L1 rate limit in Pb-Pb collisions. 
+
+The CMS subsystems as well as their interaction with the DAQ have been studied and a series of problematic areas were identified. In this proposal the main interest area are specified reporting also about the corresponding manpower needs. The preliminary goal is to increase the CMS readout rate to 30 kHz. It is however important to bear in mind that this proposal will focus only on aspects that will potentially require
+hardware changed. The comprehensive series of tasks needed for the overall run preparation is not reported here. 
 
