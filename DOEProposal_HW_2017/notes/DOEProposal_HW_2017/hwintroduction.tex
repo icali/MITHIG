@@ -3,9 +3,9 @@ The CMS experiment is mainly designed to record high luminosity, high pile-up (P
 proposals, the main changes required to allow CMS to operate in the HI environment can be summarized as follows:
 
 \begin{itemize}
-\item A dedicated silicon pixel Front End Device (FED) firmware for a high multiplicity environment. The overall FED data flow has been re-designed, changing the readout scheme of the input links and redistributing internal buffers.
+\item A dedicated silicon pixel Front End Driver (FED) firmware for a high multiplicity environment. The overall FED data flow has been re-designed, changing the readout scheme of the input links and redistributing internal buffers.
  
-\item The silicon tracker zero suppression was bypassed and all channel information was forwarded to the CMS DAQ system. Zero suppression was then performed in the HLT. A new tracker FED firmware was also designed to reduce the event payload by $\sim 30 \%$ without information loss. The reduction was obtained by stripping unused information out from the standard data format.  
+\item The silicon tracker zero-suppression was bypassed and all channel information was forwarded to the CMS DAQ system. Zero-suppression was then performed in the HLT. A new tracker FED firmware was also designed to reduce the event payload by $\sim 30 \%$ without information loss. The reduction was obtained by stripping unused information out from the standard data format.  
 
 \item DAQ reconfiguration / rebalance to deal with big data volume and high throughput. In standard p-p collision operation, an average event size corresponds to $\sim 1-1.5$ MB. During Pb-Pb collision operation, the average event size is around 17 MB. 
 
