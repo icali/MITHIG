@@ -1,0 +1,18 @@
+\providecommand{\newblock}{}
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+% Bibliography created with iopart-num v2.1
+% /biblio/bibtex/contrib/iopart-num
+
+\bibitem{Roland:2007is}
+Roland G (CMS Collaboration) 2007 {\em J.Phys.\/} {\bf G34} S733--736
+  (\textit{Preprint} \eprint{nucl-ex/0702041})
+
+\bibitem{Dokshitzer:2001zm}
+Dokshitzer Y~L and Kharzeev D 2001 {\em Phys.Lett.\/} {\bf B519} 199--206
+  (\textit{Preprint} \eprint{hep-ph/0106202})
+
+\end{thebibliography}
