@@ -3,11 +3,11 @@ The CMS experiment is mainly designed to record high luminosity, high pile-up (P
 proposals, the main changes required to allow CMS to operate in the HI environment can be summarized as follows:
 
 \begin{itemize}
-\item A dedicated silicon pixel Front End Driver (FED) firmware for a high multiplicity environment. The overall FED data flow has been re-designed, changing the readout scheme of the input links and redistributing internal buffers.
+%\item A dedicated silicon pixel Front End Driver (FED) firmware for a high multiplicity environment. The overall FED data flow has been re-designed, changing the readout scheme of the input links and redistributing internal buffers.
  
 \item The silicon tracker zero-suppression was bypassed and all channel information was forwarded to the CMS DAQ system. Zero-suppression was then performed in the HLT. A new tracker FED firmware was also designed to reduce the event payload by $\sim 30 \%$ without information loss. The reduction was obtained by stripping unused information out from the standard data format.  
 
-\item DAQ reconfiguration / rebalance to deal with big data volume and high throughput. In standard p-p collision operation, an average event size corresponds to $\sim 1-1.5$ MB. During Pb-Pb collision operation, the average event size is around 17 MB. 
+%\item DAQ reconfiguration / rebalance to deal with big data volume and high throughput. In standard p-p collision operation, an average event size corresponds to $\sim 1-1.5$ MB. During Pb-Pb collision operation, the average event size is around 17 MB. 
 
 \item The Level-1 trigger firmware was redesigned to perform a dedicated underlying event subtraction algorithm and to include specific HI algorithms.
 
@@ -20,6 +20,8 @@ period were also devoted to exploring the limit of CMS in terms of the maximum L
 
 During the 2015 run, the collision rate was $\sim 20$ kHz. For the 2018 Pb-Pb run we expect an increase in the collision rate to $\sim 30$ kHz. Without applying any changes to the L1 trigger mix used in 2015, this extra factor would mean operating CMS above its limit, with a significant impact on the physics program. In addition, as discussed in the previous sections, it would be beneficial to also further increase the number of minimum bias events collected. 
 
-The CMS subsystems, as well as their interaction with the DAQ, have been studied and a series of bottleneck areas have been identified. This proposal addresses certain aspects of these limitations. The goal is to increase the CMS readout rate to 30 kHz. There are multiple places to improve the throughput. Some of these are interdependent.  Some are in progress, or are planned as part of general CMS Experiment Physics Responsibilities (EPR). These throughput improvements will be discussed below. In particular the Tracker FED FW and ECAL DCC FW updates are the projects that match well with MIT expertise, for which funds are requested in this proposal.
+The CMS subsystems, as well as their interaction with the DAQ, have been studied and a series of bottleneck areas have been identified. This proposal addresses certain aspects of these limitations. The goal is to increase the CMS readout rate to 30 kHz. There are multiple places to improve the throughput. Some of these are interdependent.  Some are in progress, or are planned as part of general CMS Experiment Physics Responsibilities (EPR). These throughput improvements will be discussed below. In particular the Tracker FED FW 
+%and ECAL DCC FW 
+updates are the projects that match well with MIT expertise, for which funds are requested in this proposal.
 It is, however, important to bear in mind that this proposal will focus only on aspects that will require hardware changes. The comprehensive series of tasks needed for overall run preparation are not reported here. 
 
