@@ -1,0 +1,60 @@
+\subsection{Dataflow\label{subsec:dataflow}}
+The previous sections of this proposal have discussed the possibility of increasing the CMS readout L1 rate and the number of events on tape for Pb-Pb collisions. This strategy has a direct impact on several areas associated with data handling, data transfer, data storage and data processing. It is not part of the scope of this proposal to discuss the details associated with the work required in the different areas, but the list of tasks that will be considered before the 2018 HI run is reported below:
+
+\begin{itemize}
+\item Optimize the DAQ operation for Pb-Pb collisions. This includes also a further increase of the bandwidth between HLT and Storage Manager. Also, the buffering strategy of data at P5 should be studied
+
+\item Reduce the average RAW event size and create a new Analysis Object Data (AOD), reducing further the data volume of processed data.
+
+\item Adjust the computing model for HI data to maximally benefit from the dedicated HI T2 computing center based at Vanderbilt University. 
+\end{itemize}
+
+Although reduction of the size of RAW events is important, few details are given here since it is not within the scope of this proposal. With the actual configuration, it is indeed impossible to reduce the event size without creating a new event data content for RAW data. Only a fraction of the CMS detector would be stored in the event, reducing the overall event size by a factor 2 or 3. This solution is definitely the most promising but it has significant drawbacks. All the information stripped from the event cannot be recovered. The new event content should also be general enough to foresee any future analysis of these data. At present the most promising idea is to have the HLT produce two main data streams. The first data stream would contain events in standard CMS event data format, while the second data stream would contain events where only a subset of the tracker and pixel FEDs information is recorded. This latter data format will be used only for minimum bias events (or a fraction of the minimum bias events recorded), while the first data format will be used for all the other triggered events. The overall trigger mix decided in the future will define the exact average data size, but rough estimation indicates a reduction of $\sim 30$ \% in the event data size. Another solution being investigated is to have a similar approach to the one described above, but to replace the specific minimum bias data format with already processed objects. In this case, the HLT calculates tracks for minimum bias events and instead of outputting the RAW data format, the computed track objects are instead outputted. Preliminary studies demonstrate than this approach could reduce further the event data size. However, the track reconstruction in HLT would be performed using online conditions of detector alignment and calibrations, leading to the possibility of having a lower tracking efficiency as well as a high fake rate. 
+
+
+
+
+
+%\newpage
+%
+%\section{Dataflow\label{sec:dataflow}}
+%In the previous sections of the proposal it was discussed the possibility of increasing the CMS readout rate for HI collisions. However, in the specific case of the 2018 HI run and beyond, the increase of L1 rate is not required for a more complete sample and selection at HLT but rather to record an high number of minimum bias events and enrich the samples on tape. This approach impose also touching also few main areas discussed below.
+%
+%
+%\subsection{Data transfer from HLT to Storage Manager\label{subsec:hltSM}}
+%The CMS High Level Trigger (HLT) outputs the selected events to a Lustre based system named Storage Manager (SM). The Storage Manager receives data from the HLT, buffers them and as soon as there are enough resources available, the data are sent to the Tier-0.  
+%After the 2015 PbPb run an hardware upgrade of the SM was performed and at today the overall I/O to disk is of ~ 9GB/s and with a total buffer space of ~500 TB. These parameters are actually critical because they are defining the maximun rate/number of events that can be stored to disk after HLT selection. Two aspects needs to be investigated to increase the system performance: increase of bandwith from HLT to SM and  reduction of event size.
+%
+%\subsubsection{HLT SM upgrade\label{subsec:hltSMupgrade}}
+%During the 2016 pPb run it was demonstrated that a sustainable writing bandwith to SM is of 6.5 GB/s. The SM itself could also reach an higher writing speed using almost the total I/O bandwith. However each Builder Units (BUs), that represent the final HLT/DAQ stage before SM,  are limited by the interconnection network at ~ 100 MB/s each. Considering that in the system there are a total of 72 BUs and that on the same networt also the data arriving from the HLT are transferred, the saturation at the 6.5 GB/s mentioned above is the actual hard limit of the system. Considering that the average minimum bias event size is of ~ 0.5 MB/ev. the overall rate of events to disk would be at a maximum of ~13 kHz. 
+%
+%One possibility being investigated is to further upgrade the DAQ/SM system. There are three main actions that theoretically could be taken. Increase the number of BUs and re-adjust the switching systems between BU and SM. The latter could require the minimum hardware investment, however, it is already known that the performance increase will be minimal. The upgrade of the BU number is only limited now but the actual rack space availability at P5. At present there is no clear estimation of the cost required for the hardare upgrade but it should be taken into consideration as a possibility for the next fiscal year. 
+%
+%Once the limit described above are overcome, a further bandwidth increase could be obtained upgrading further the SM. 
+%
+%\subsubsection{event size reduction\label{subsec:hltSMupgrade}}
+%While in the previos section it was described how to potentially increase the bandwidth from HLT to SM, in this section it is approached the subject of reducing the actual event size. It comes without saying that this approach is not only beneficial for increasing the throughput to SM but also to reduce the overall data volume on disk. 
+%
+%The first parameter that is taken under consideration is obviously the root compression level applied in HLT. However, the effect expected are of the order of few percent considering that we are already running with a factor 7 on a scale of 9. 
+%
+%A second aspect that it is taken into consideration is to creata a new event data content for RAW data. Only a fraction of the CMS detector could be stored in the event reducing the overall event size of a factor 2 or 3. This solution is definitively the most promising but it has significant drawbacks. All the information stripped from the event cannot be recovered. The new event content should also be general enough to foresee any future analysis of these data. At present the most prominent idea is to have the HLT to produce to main data streams. The first data stream would contain events in standard CMS event data format while the second data stream would contain events where only a substet of the tracker and pixel FEDs informations are recorded. This latter data format will be used only for minimum bias events while the first data format will be used for all the other triggered events. The overall trigger mix decided in the future will define the exact size of the average data size but rough estimation indicated a reduction of ~30 \% in the overall data size. 
+%
+%Another solution being investigated is to have a similar approach to the one described above but to replace the specific minimum bias data data format with already processed objects. In this case, the HLT calculates tracks for minimum bias events and instead of outputting the RAW data format, the computed tracks objects are instead outputted. Preliminary studies demonstrates than this approach could reduce further the data size. However, the tracks reconstruction in HLT would be performed using online conditions of detector allignement and calibrations contemplating the possibility of have a lower tracking efficiency as well as an high fake rate. 
+%
+%
+%\subsection{Tier-0 data buffering, prompt reconstruction and data tape requirement\label{subsec:Tier-0AndProcessing}}
+%As discussed in previous sections the overall data volume has strong impact on the overall tape/disk space requirement and processing time. It is not part of the scoper= of this proposal to discuss the requirements for the the computing infrastructure. However, in this section are reported some main aspects that should be kept in mind for the run preparation and that will require proper and careful thinking and manpower before the 2018 run.
+%
+%Without any action taken on the data format, around 6-8 PB of data will be produced during the 2018 run. The CMS computing structure foresees that the RAW data in streamer format are shipped by P5 to a Tier-0 streamer pool based on EOS file system at CERN. The streamer files are merged and repacked to produce RAW files in ROOT format that will be stored for good. Once the rapacking has finished, the data files are sent to custodial sites and also the prompt reconstruction step is started. At present the Tier-0 is able to repack raw data with a speed of 1.5 GB/s. This already implies that the some studies should be performed on the feasibility to increase the repack speed as well as properly calibrate the streamer buffer. Also the managing of the data should be adjusted properly. Without a correct data handling indeed there is the possibility that the fast feedbacks provided from the prompt reco would be delayed of several days. Data parking should also be considered as an option for the minimum bias datasets
+%
+%A second aspect to be carefully considered is the overall tape availability for the CMS HI program. With the work discussed in this proposal, the only real bottleneck on the overall CMS program is it the overal tape availability. Possible solutions involving the storage of only RAW data plus miniAOD are being and should be considered.
+%
+%A there aspect that should be taken carefully in account is the data accessibility and data re-processing. At peresent, the Fermilab Tier-1 where the data are stored on tape is not being used to perform any data processing. Tier-2s and in particulate the Vanderbilt one are used for data re-processing. However, already at present, there is not enough disk space available to host a full dataset of RAW data and the corresponding outputs. The operation procedure used at present foresees the copy of a part of dataset to the processing site, a partial processing followed by the deletion of the original sample to reserve space for the transfer of extra data to be processed. With this configuration, already over a month is required to process a minimum bias dataset collected during the 2015 running period. Some manpower should be invested in investigating potential solution to the problem. Clearly having more disk space and more CPU power on dedicated HI processing sites would be extremely beneficial. 
+%
+%
+%
+%
+%
+%
+%
+%%\subsection{Overall tape requirement for data storage and processing power\label{subsec:processing}} 
