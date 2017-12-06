@@ -4,22 +4,22 @@ BASHMODE=${1:-0}
 #
 
 rm *.aux
-pdflatex proposal.tex
-pdflatex proposal.tex
-bibtex proposal.aux
-bibtex proposal.aux
-bibtex proposal.aux
-pdflatex proposal.tex
-pdflatex proposal.tex
-#cp proposal.pdf ~/Dropbox/tmp
+pdflatex status.tex
+pdflatex status.tex
+bibtex status.aux
+bibtex status.aux
+bibtex status.aux
+pdflatex status.tex
+pdflatex status.tex
+#cp status.pdf ~/Dropbox/tmp
 
 if [ $BASHMODE -eq 0 ]; then
-    evince proposal.pdf
-    open proposal.pdf
+    evince status.pdf
+    open status.pdf
 else
     echo
     echo "----------------------------------------------------------------------------"
-    echo " PDF Output file: ${PWD}/proposal.pdf"
+    echo " PDF Output file: ${PWD}/status.pdf"
     echo "----------------------------------------------------------------------------"
     echo
 fi
