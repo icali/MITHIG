@@ -15,7 +15,7 @@ standard data format.
 
 \item DAQ reconfiguration / rebalance to deal with big data volume and high throughput. In standard p-p collision
 operation, an average event size corresponds to $\sim 1-1.5$ MB. During Pb-Pb collision operation, the average event
-size is around 17 MB.
+size at HLT input is around 17 MB (14 MB of the event are due to the reading out of all channels of the silicon tracker).  
 
 \item The Level-1 trigger firmware was redesigned to perform a dedicated underlying event subtraction algorithm and to
 include specific HI algorithms.
@@ -32,7 +32,6 @@ limit, as well as solutions to increase it, will be discussed.
 During the 2015 run, the collision rate was $\sim 20$ kHz. For the 2018 Pb-Pb run we expect an increase in the collision
 rate to $\sim 30$ kHz. Without applying any changes to the L1 trigger mix used in 2015, this extra factor would mean
 operating CMS above its limit, with a significant impact on the physics program. In addition, it would be beneficial to also further increase the number of minimum bias events collected.
+The goal of the poposed work is to increase the CMS readout rate to 30 kHz as well as an higher number of events to disk.
 
-The CMS subsystems, as well as their interaction with the DAQ, have been studied and a series of bottleneck areas have
-been identified. The goal is to increase the CMS readout rate to 30 kHz. These throughput improvements
-will be discussed below.
+It is important to bare in mind that also if the latter two projects results vital for the Minimum Bias event collection and the HF program, these two projects have also a fundamental importance in the ability of CMS to exploit the potential of the luminosity delivered by LHC in case of PbPb collisions. 
