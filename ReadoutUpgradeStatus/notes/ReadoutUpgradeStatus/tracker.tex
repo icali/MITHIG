@@ -10,7 +10,7 @@ The solution adopted up to now was to bypass the tracker zero-suppression implem
 full detector information to the DAQ/HLT. HI-specific common mode noise subtraction and zero-suppression algorithms were
 implemented as HLT processes. However, this solution results in a heavy load on the links between the FEDs and the DAQ
 and on the DAQ itself. The links are based on S-Link technology with a maximum speed of 200 MB/s. Some FEDs (connected
-to sensors in which higher multiplicity is expected) have duplicate links, allowing a maximum of $\sim 400$ MB/s per
+to sensors in which higher multiplicity is expected) have duplicate links, allowing a maximum of $\sim$ 400 MB/s per
 FED.  Considering that on the average fragment size is ~32 kB/event (VR10 version), the readout limit is at around 12 kHz. It has
 already been demonstrated that the FED itself is designed to sustain up to 520 MB/s of throughput. The limitation is
 then only coming from the links to the DAQ.
@@ -29,8 +29,8 @@ After evaluation, it was decided that solution (2) represents the most interesti
 For completeness, we should also report that other possible strategies were studied/considered to increase the L1 rate
 without modifying the tracker FED FW. However, they were rejected as being either too complicated to be implemented or
 as underperforming. The two other solutions envisaged were either to increase the number of links between the tracker
-FEDs and the DAQ or to reduce the data payload. The first solution appears to be too complicated, adding an extra $\sim
-400$ links. Apart from the technical constraints, there would also not be enough time to install and commission the
+FEDs and the DAQ or to reduce the data payload. The first solution appears to be too complicated, adding an extra $\sim$
+400 links. Apart from the technical constraints, there would also not be enough time to install and commission the
 links during the available shutdown time. The second solution is to reduce the data payload. A FED firmware version
 implemented already in 2015 allows the reduction from 10 to 8 in the number of bits read out by each strip ADC. However,
 this strategy would allow only a moderate increase of $\le 20 \%$ of the overall L1 rate at the cost of a reduction of
@@ -46,7 +46,7 @@ Implementing the algorithm in firmware would give the maximum data reduction to 
 Performance studies on the algorithm using 2015 PbPb data were carried out and a summary of the results can be found in the presentation \cite{stripDerFollPerf}. As shown in fig. \ref{fig:stripDerivFollowerPerf}
 the Derivative Follower algorithm is inefficient in finding high-pt tracks compared to standard HI algoritm used in HLT during the 2015 Pb-Pb collision run. The algorithm optimization can still be performed. However, considering the complexity of implementing the algorithm in firmware and the fact that the whole HI physics program would be based on this algorithm, it was decided to reduce the priority to this option but rather invest on the hybrid data format solution described in section \ref{subsubsec:hybridtracker}
 
-  \begin{figure}[htbp]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.80\textwidth]{figures/DerivativeFollowerEfficiency.png}
 \caption{}
@@ -57,19 +57,24 @@ the Derivative Follower algorithm is inefficient in finding high-pt tracks compa
 
 \subsubsection{Hybrid data format \label{subsubsec:hybridtracker}}
 The Hybrid data format strategy is based on the principle that the standard FED zero suppression fails only for the fraction of APVs in which the baseline is either heavily shifted or distorted. When none of the two conditions are met, the Common Mode Noise calculated as a constant value to be subtracted to all the ADC of a single APV, is good enough for cluster findings. In fig. \ref{fig:stripBadAPV} it is shown the fraction of modules for which the full baseline needs to be reconstructed as function of centrality. 
-For very central Pb-Pb collisions ~ 10 k APVs require a specific handling while for Minimum Bias events only ~100 APVs require a specific handling.
+For very central Pb-Pb collisions $\sim$ 10 k APVs require a specific handling while for Minimum Bias events only $\sim$ 100 APVs require a specific handling.
 
-In this optic, it is possible to receive a significant data reduction to DAQ sending an hybrid data format containing the Virgin Raw data only for the APVs that require a special care. The APVs without pathology in the baseline are zero suppressed in the tracker FED using the standard zero suppression algorithm. In HLT, the tracker data will be unpacked and the standard HI Zero Suppression algorithm (Baseline Follower) is used to zero suppress the problematic APVs. 
+In this optic, it is possible to receive a significant data reduction to DAQ sending an hybrid data format containing the Virgin Raw data only for the APVs that require a special care. The APVs without pathology in the baseline are zero suppressed in the tracker FED using the standard zero suppression algorithm. In HLT, the tracker data will be unpacked and the standard HI Zero Suppression algorithm (Baseline Follower) will be used to zero suppress the problematic APVs. 
 
-The code needed to emulate the full chain is still being written so it is not yet available a precise measure of the actual data size in hybrid data format. However, a rough estimation indicates a factor 2 to 3 on the standard suppressed size. As a consequence, the goal of 30 kHz should be achieved.
+The code needed to emulate the full chain is still being written so it is not yet available a precise measure of the actual data size in hybrid data format. However, a rough estimation can be performed considering that each APV sent to the DAQ in VR format adds a weight of $\sim$ 1280 bits. The average HI zero suppressed event event size for the tracker is of $\sim$ 500 kB. This means that DAQ system should be able to handle an avent size that can vary from $\sim$ 500 kB in case of peripheral Pb-Pb collisions to an event size that can be up to $\sim$ 12 MB in case of very central Pb-Pb collisions. Using a conservative approach, we consider that the average tracker event size to DAQ will be of roughly $\sim$ 1 MB.  The goal of 30 kHz should then be achieved.
 
     
-
-
- \begin{figure}[htbp]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.80\textwidth]{figures/BadAPV.pdf}
 \caption{}
 \label{fig:stripBadAPV}
 \end{center}
 \end{figure}
+
+The hybrid data format strategy does not allow the same level of data format reduction as for the Derivative Follower algorithm strategy. However, it has the advantage that allows data reduction reusing the already well known HI Derivative Follower algorithm. The performances are then preserved over the several HI runs. 
+
+At the time of writing is also being discussed which strategy to be used to mark the APVs as problematic. Two approaches has been evaluated. The first uses the CMN value shift. It is assumed than in case of patological baselines, the CMN shift is higher than for for not patological ones. A method using a threshold can then be envisaged. A second approach consists in counting the number of strips with ADC above a certain threshold. It gives an indication of the APV signal occupancy.It is indeed demonstrated that higher is the multiplicity and higher it is the probability of having deformed baselines. 
+
+Once the emulation code will be completed, the final strategy will be defined with also the corresponding fine tuning. An over efficient algorithm to define problematic APVs would not be an issue as long as a data reduction of at least a factor 3 respect to the VR data size is obtained. 
+
