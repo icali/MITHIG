@@ -1,10 +1,23 @@
 \section{Computing}
 \label{sec:computing}
 
+At the time of writing it still being discussed with the LHC Program Coordinators the distributions of the luminosity that LHC could deliver among the 4 experiment.
+Two scenarios are considered for CMS: 1.2~nb$^{-1}$ and 1.8~nb$^{-1}$.
+The physics program can be logically divided in two main blocks, the \{“}triggered physics data collection\{”} that is depending by the delivered luminosity and then \{“}Minimum Bias data collection\{”} that depends only from the LHC uptime. 
+
+The overall run will last 24 days (576 h) with 21 days (504 h) for delivering luminosity. 
+The most probable scenario foresees and LHC uptime of 50~\%. In order to collecte the requested six bilions Minimum bias events sample, a rate to disk of 6.5 kHz is needed. 
+The physics triggered data rate is expected to be of ~ 500 Hz for the 1.2~nb$^{-1}$ scenario and of ~ 750 Hz for the 1.8~nb$^{-1}$ scenario. 
+
+The Minimum Bias event size is of ~ 1 MB/event. Using the standard CMS RAW data content would require 6 PB of tape. In order to reduce the data volume to tape, it was envisaged the possibility for the Minimum Bias dataset to have a reduced RAW data content. In this format only the silicon pixel, silicon strip and Hadron Forward calorimeters information are kept. The reduced format allow a reduction of ~35\% on the event size.  The default scenario for the 2018 Pb-Pb data-taking foresees that all physics triggers events will be collected with standard CMS RAW data content. A fraction of the Minimum Bias events (500 M) will be collected with standard CMS RAW data content. The remaining MB events (5.5 B) will have a reduced raw data content. 
+
+In order to optimize the tape occupancy, the products of the data reconstructions will not be saved. Only the Analysis Object Data (AOD) will be recorded on tape for both physics triggered and minimum bias datasets. 
+
+In table \ref{tab:datavolume} the data volume produced considering the different scenarios of delivered luminosity are reported.
+
+ 
 \begin{center}
-\begin{tabular}{ |c|c|c|c|} 
-
-
+\begin{tabular}{ |c|c|c|c|} \label{tab:datavolume}
 
 %\cline{1-6}
 %& \multicolumn{2}{|c|}{\textbf{Luminosity 0.6 nb-1}} & \multicolumn{2}{|c|}{\textbf{Luminosity 1.2 nb-1}}& \multicolumn{2}{|c|}{\textbf{Luminosity 1.8 nb-1}}\\
@@ -34,3 +47,6 @@ Luminosity 1.8 nb-1 & 377 & 287 \\
 \hline 
 \end{tabular}
 \end{center}
+
+
+The computing strat
