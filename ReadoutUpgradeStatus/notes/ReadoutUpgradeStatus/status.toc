@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}Hardware Upgrade}{3}
+\contentsline {subsection}{\numberline {2.1}Introduction}{3}
+\contentsline {subsection}{\numberline {2.2}Silicon Strip Tracker}{3}
+\contentsline {subsubsection}{\numberline {2.2.1}Derivative follower algorithm }{4}
+\contentsline {subsubsection}{\numberline {2.2.2}Hybrid data format }{5}
+\contentsline {subsection}{\numberline {2.3}ECAL}{6}
+\contentsline {subsection}{\numberline {2.4}Silicon Pixel Detector}{7}
+\contentsline {subsection}{\numberline {2.5}L1 trigger}{7}
+\contentsline {subsection}{\numberline {2.6}Dataflow}{8}
+\contentsline {section}{\numberline {3}Management Plan, Personnel, Schedule}{9}
+\contentsline {subsection}{\numberline {3.1}Dataflow}{10}

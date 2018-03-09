@@ -1,0 +1,20 @@
+\providecommand{\newblock}{}
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+% Bibliography created with iopart-num v2.1
+% /biblio/bibtex/contrib/iopart-num
+
+\bibitem{stripDerFollPerf}
+\urlprefix\url{https://twiki.cern.ch/twiki/pub/CMS/MITHIGAnalysis2017/Baty_DerivativeFollowerPerformance.pdf}
+
+\bibitem{ECALHIN}
+\urlprefix\url{https://indico.cern.ch/event/668711/contributions/2734388/attachments/1547298/2428927/HIN_ECAL_DPG_20171025.pdf}
+
+\bibitem{pixelFEROLThroughput}
+Kilpatrick M Pixel ferol throughput
+  \urlprefix\url{https://indico.cern.ch/event/670423/contributions/2744625/attachments/1536139/2406497/FEDTester_10_04_17.pdf}
+
+\end{thebibliography}
